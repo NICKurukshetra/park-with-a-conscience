@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/homeScreen/homeScreen.dart';
+import 'screens/plantScreen/plantScreen.dart';
 
 
 void main(List<String> args) {
@@ -13,12 +14,13 @@ class pwcApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomeScreen(),
-      // initialRoute: "/homeScreen",
-      // routes: {
-      //   // "/" : (context) => HomeScreen(),
-      //   "/homeScreen" :(context) => HomeScreen()
-      // },
+      // home: HomeScreen(),
+      initialRoute: "/plantScreen",
+      routes: {
+        // "/" : (context) => HomeScreen(),
+        "/homeScreen" :(context) => HomeScreen(),
+        "/plantScreen":(context) => PlantScreen()
+      },
     );
   }
 }

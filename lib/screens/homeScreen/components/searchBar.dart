@@ -26,12 +26,26 @@ class SearchBar extends StatelessWidget {
                 ),
                 child: Row(
                   children: [
-                    Text(
-                      "Park with a Conscience",
-                      style: TextStyle(
-                        fontSize: 25,
-                      ),
-                    )
+                    Padding(padding: EdgeInsets.all(10)),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Park",
+                          style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white)
+                        ),
+                        Text(
+                          "with a ",
+                          style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+                        ),
+                        Text(
+                          "ConScience",
+                          style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.white)
+                        ),
+                      ],
+                    ),
+                    // Spacer(),
+                    // CircleAvatar()
                   ]
                 ),
               ),

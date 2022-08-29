@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'screens/homeScreen/homeScreen.dart';
-import 'screens/plantScreen/plantScreen.dart';
+import 'screens/plantScreen.dart';
 
 
 void main(List<String> args) {

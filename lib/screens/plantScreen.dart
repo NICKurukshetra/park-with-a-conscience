@@ -134,12 +134,12 @@ class PlantScreenHeader extends StatelessWidget {
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
         children: [
-          InfoCard(size: size),
-          InfoCard(size: size),
-          InfoCard(size: size),
-          InfoCard(size: size),
-          InfoCard(size: size),
-          InfoCard(size: size),
+          InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber,),
+          InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,),
+          InfoCard(size: size, cardName: 'temperature', icon: Icons.thermostat, iconColor: Colors.orange,),
+          InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,),
+          InfoCard(size: size, cardName: 'maintainance', icon: Icons.content_cut, iconColor: Colors.blueGrey,),
+          InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,),
         ],
         
       ),
@@ -151,9 +151,16 @@ class InfoCard extends StatelessWidget {
   const InfoCard({
     Key? key,
     required this.size,
+    required this.icon,
+    required this.iconColor,
+    required this.cardName,
   }) : super(key: key);
 
   final Size size;
+  final Color iconColor;
+  final IconData icon;
+  final String cardName;
+
 
   @override
   Widget build(BuildContext context) {
@@ -165,18 +172,18 @@ class InfoCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Icon(
-            Icons.sunny, 
+            icon, 
             size: size.width * 0.1,
-            color: Colors.amber,
+            color: iconColor,
           ),
           Text(
             "Information",
             style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              color: Colors.amber,
+              color: iconColor,
             ),
           ),
           Text(
-            "SUNLIGHT",
+            cardName.toUpperCase(),
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
               fontWeight: FontWeight.bold
             ),

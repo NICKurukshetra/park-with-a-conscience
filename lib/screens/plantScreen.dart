@@ -15,7 +15,16 @@ class PlantScreen extends StatelessWidget {
           PlantInfoGrid(size: size),
           PlantInfoText(size: size)
         ],
-      )
+      ),
+      floatingActionButton: IconButton(
+        icon: Icon(
+          Icons.arrow_back, 
+          color: Colors.white,
+          size: size.width*0.07,
+          ), 
+        onPressed: () {}
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
@@ -162,7 +171,9 @@ class InfoCard extends StatelessWidget {
           ),
           Text(
             "Information",
-            style: Theme.of(context).textTheme.bodyLarge,
+            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+              color: Colors.amber,
+            ),
           ),
           Text(
             "SUNLIGHT",

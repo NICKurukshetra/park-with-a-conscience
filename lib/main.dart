@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/homeScreen/homeScreen.dart';
+import 'screens/homeScreen.dart';
 import 'screens/plantScreen.dart';
 
 
@@ -15,7 +15,7 @@ class pwcApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: HomeScreen(),
-      initialRoute: "/plantScreen",
+      initialRoute: "/homeScreen",
       routes: {
         // "/" : (context) => HomeScreen(),
         "/homeScreen" :(context) => HomeScreen(),

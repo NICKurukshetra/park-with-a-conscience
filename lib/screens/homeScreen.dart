@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:park_with_conscience/screens/plantScreen.dart';
 
 
 class HomeScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
       elevation: 0.0,
+      backgroundColor: Colors.green,
       leading: IconButton(
         icon: Icon(Icons.menu), 
         onPressed: () {  },)
@@ -17,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
       child: Column(
         children: <Widget>[ 
-          HeaderWithSearchBar(size: size),
+          HeaderWithDropDown(size: size),
           CategoriesList(size: size)
         ],
       ),
@@ -71,8 +73,8 @@ class CategoriesList extends StatelessWidget {
   }
 }
 
-class HeaderWithSearchBar extends StatelessWidget {
-  const HeaderWithSearchBar({
+class HeaderWithDropDown extends StatelessWidget {
+  const HeaderWithDropDown({
     Key? key,
     required this.size,
   }) : super(key: key);
@@ -91,7 +93,7 @@ class HeaderWithSearchBar extends StatelessWidget {
       height: size.height * 0.2-27,
       // color: Colors.black,
       decoration: BoxDecoration(
-        color: Colors.blue,
+        color: Colors.green,
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(36),
           bottomRight: Radius.circular(36)
@@ -136,27 +138,68 @@ class HeaderWithSearchBar extends StatelessWidget {
           boxShadow: [
             BoxShadow(
               offset: Offset(0,10),
-              blurRadius: 50,
-              color: Colors.blue.withOpacity(0.3 )
+              blurRadius: 40,
+              color: Colors.green.withOpacity(0.4)
             ) 
           ],
         ),
-        child: Center(
-          child: TextField(
-            decoration: InputDecoration(
-              hintText: "Search",
-              hintStyle: TextStyle(
-                color: Colors.blue.withOpacity(0.5)
-              ),
-              enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: () {  },)
-            ),
-          ),
-        ),
+        child: DropDownWidget(),
+        // child: Center(
+        //   child: TextField(
+        //     decoration: InputDecoration(
+        //       hintText: "Search",
+        //       hintStyle: TextStyle(
+        //         color: Colors.blue.withOpacity(0.5)
+        //       ),
+        //       enabledBorder: InputBorder.none,
+        //       focusedBorder: InputBorder.none,
+        //       suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: () {  },)
+        //     ),
+        //   ),
+        // ),
       )
     )
         ]),
+    );
+  }
+}
+
+class DropDownWidget extends StatefulWidget {
+  const DropDownWidget({Key? key}) : super(key: key);
+
+  @override
+  State<DropDownWidget> createState() => _DropDownWidgetState();
+}
+
+class _DropDownWidgetState extends State<DropDownWidget> {
+  int plantCode = 0;
+  
+  @override
+  Widget build(BuildContext context) {
+    int totalPlants = 28;
+    List<int> totalPlantsList = List<int>.generate(totalPlants, (i) => i , growable: true);
+    return DropdownButtonHideUnderline(
+      child: DropdownButton<int>(
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
+        elevation: 10,
+        value: plantCode,
+        isExpanded: true,
+        // iconDisabledColor: Colors.green,
+        icon: const Icon(Icons.arrow_downward, color: Colors.green,),
+        items: totalPlantsList.map<DropdownMenuItem<int>>((int value) {
+          return DropdownMenuItem<int>(
+            value: value,
+            child: Text("$value"),
+          );
+        }).toList(), 
+        onChanged: (int? newValue) {
+          setState(() {
+            plantCode = newValue!;
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: plantCode,)),
+            );
+          });
+        }
+      ),
     );
   }
 }

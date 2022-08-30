@@ -1,18 +1,75 @@
-import 'package:flutter/material.dart';
+// import 'dart:convert';
+import 'dart:ui';
 
-class PlantScreen extends StatelessWidget {
-  const PlantScreen({Key? key}) : super(key: key);
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:park_with_conscience/model/plant_information.dart';
+
+
+class PlantScreen extends StatefulWidget {
+  final int plantCode;
+  
+  const PlantScreen({super.key, required this.plantCode}); 
+  @override
+  State<PlantScreen> createState() => _PlantScreenState();
+}
+
+class _PlantScreenState extends State<PlantScreen> {
+
+
+  PlantInfoModel? plantInfo;
+  
+  
+  Future<void> readJson( int index) async {
+    final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
+    // final data = json.decode(dataString);
+    final plantInfoModel = plantInfoModelFromJson(dataString, index);
+    setState(() {
+    plantInfo = plantInfoModel;
+    // index = plantCode;
+      
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    int index = widget.plantCode;
+    readJson(index);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // widget.plantCode;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       // appBar: AppBar(),
       backgroundColor: Color.fromARGB(243, 255, 255, 255),
       body: Column(
         children: [
-          PlantScreenHeader(size: size),
-          PlantInfoGrid(size: size),
+          PlantScreenHeader(
+            size: size, 
+            plantName: plantInfo?.plantName??"", imageUrl: plantInfo?.image??"", /*plantCommonName:plantInfo. ,*/),
+          // PlantInfoGrid(size: size),
+          Expanded(
+      child: GridView.count(
+        physics: NeverScrollableScrollPhysics(),
+        crossAxisCount: 3,
+        padding: EdgeInsets.all(10),
+        mainAxisSpacing: 15,
+        crossAxisSpacing: 15,
+        children: [
+          InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
+          InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
+          InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
+          InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.type??"",),
+          InfoCard(size: size, cardName: 'maintenance', icon: Icons.content_cut, iconColor: Colors.blueGrey,information: plantInfo?.code3NumericDigits??"",),
+          InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+        ],
+        
+      ),
+    ),
           PlantInfoText(size: size)
         ],
       ),
@@ -22,12 +79,17 @@ class PlantScreen extends StatelessWidget {
           color: Colors.white,
           size: size.width*0.07,
           ), 
-        onPressed: () {}
+        onPressed: () {
+          Navigator.of(context).pop(context);
+        }
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
     );
   }
 }
+
+
+
 
 class PlantInfoText extends StatelessWidget {
   const PlantInfoText({
@@ -36,6 +98,7 @@ class PlantInfoText extends StatelessWidget {
   }) : super(key: key);
 
   final Size size;
+  // final String info;
 
   @override
   Widget build(BuildContext context) {
@@ -71,44 +134,52 @@ class PlantScreenHeader extends StatelessWidget {
   const PlantScreenHeader({
     Key? key,
     required this.size,
+    required this.plantName,
+    required this.imageUrl,
+    // required this.plantCommonName,
   }) : super(key: key);
 
   final Size size;
+  final String plantName;
+  final String imageUrl;
+  // final String plantCommonName;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: size.height * 0.43,
-      color: Colors.green,
+      decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"),fit: BoxFit.cover)),
       child: Stack(children: [
         Container(
-    height: size.height * 0.43,
-    decoration: BoxDecoration(
+          height: size.height * 0.43,
+          // width: size.width,
+          // child: Image?.network(imageUrl)??CircularProgressIndicator(color: Colors.black,),
+        // child: NetworkImage(imageUrl) != null ? NetworkImage(imageUrl): CircularProgressIndicator()
+        decoration: BoxDecoration(
       image: DecorationImage(
-        image: AssetImage('assets/images/istockphoto-1181366400-612x612.jpeg'),
+        image: NetworkImage(imageUrl),
         fit: BoxFit.cover,
       ),
-    ),
+      ),
         ),
         Positioned(
-    bottom: 20,
-    left: 20,
-    child: Column(
+      bottom: 20,
+      left: 20,
+      child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
        Text(
-        "Aloe Vera", 
+        plantName, 
         style: Theme.of(context).textTheme.headline4!.copyWith(
           color: Colors.white, 
           fontWeight: FontWeight.bold
         ),
         ),
-       Text(
-        "Aloe Vera",
-        style: Theme.of(context).textTheme.headline6!.copyWith(
-          color: Colors.white
-        )
-      ) 
+      //  Text(
+      //   plantCommonName,
+      //   style: Theme.of(context).textTheme.headline6!.copyWith(
+      //     color: Colors.white
+      //   )
+      // ) 
       ],))
       ]),
     );
@@ -116,36 +187,36 @@ class PlantScreenHeader extends StatelessWidget {
 }
 
 
-  class PlantInfoGrid extends StatelessWidget {
-  const PlantInfoGrid({
-    Key? key,
-    required this.size,
-  }) : super(key: key);
+//   class PlantInfoGrid extends StatelessWidget {
+//   const PlantInfoGrid({
+//     Key? key,
+//     required this.size,
+//   }) : super(key: key);
 
-  final Size size;
+//   final Size size;
 
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
-        crossAxisCount: 3,
-        padding: EdgeInsets.all(10),
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        children: [
-          InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber,),
-          InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,),
-          InfoCard(size: size, cardName: 'temperature', icon: Icons.thermostat, iconColor: Colors.orange,),
-          InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,),
-          InfoCard(size: size, cardName: 'maintainance', icon: Icons.content_cut, iconColor: Colors.blueGrey,),
-          InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,),
-        ],
+//   @override
+//   Widget build(BuildContext context) {
+//     return Expanded(
+//       child: GridView.count(
+//         physics: NeverScrollableScrollPhysics(),
+//         crossAxisCount: 3,
+//         padding: EdgeInsets.all(10),
+//         mainAxisSpacing: 15,
+//         crossAxisSpacing: 15,
+//         children: [
+//           InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: '',),
+//           InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,),
+//           InfoCard(size: size, cardName: 'temperature', icon: Icons.thermostat, iconColor: Colors.orange,),
+//           InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,),
+//           InfoCard(size: size, cardName: 'maintainance', icon: Icons.content_cut, iconColor: Colors.blueGrey,),
+//           InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,),
+//         ],
         
-      ),
-    );
-  }
-}
+//       ),
+//     );
+//   }
+// }
 
 class InfoCard extends StatelessWidget {
   const InfoCard({
@@ -154,12 +225,14 @@ class InfoCard extends StatelessWidget {
     required this.icon,
     required this.iconColor,
     required this.cardName,
+    required this.information,
   }) : super(key: key);
 
   final Size size;
   final Color iconColor;
   final IconData icon;
   final String cardName;
+  final String information;
 
 
   @override
@@ -170,6 +243,7 @@ class InfoCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Icon(
             icon, 
@@ -177,8 +251,9 @@ class InfoCard extends StatelessWidget {
             color: iconColor,
           ),
           Text(
-            "Information",
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            information,
+            // overflow: TextOverflow.visible,
+            style: Theme.of(context).textTheme.bodySmall!.copyWith(
               color: iconColor,
             ),
           ),

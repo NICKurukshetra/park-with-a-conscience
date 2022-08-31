@@ -4,12 +4,12 @@ import 'package:park_with_conscience/screens/freeNurseryScreen.dart';
 List<Details> categories = [
   Details(
     name: "Solar Motion Sensor Lights", 
-    imageAddress: "assets/images/day:night SolarLights.png",
+    imageAddress: "assets/images/solarLight.jpg",
     screenName: NurseryScreen()
     ),    
   Details(
     name: "Solar Motion Sensor Lights", 
-    imageAddress: "assets/images/day:night SolarLights.png",
+    imageAddress: "assets/images/solarLight.jpg",
     screenName: NurseryScreen()
     ),    
   Details(

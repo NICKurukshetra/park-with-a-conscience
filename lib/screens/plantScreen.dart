@@ -60,7 +60,7 @@ class _PlantScreenState extends State<PlantScreen> {
         mainAxisSpacing: 15,
         crossAxisSpacing: 15,
         children: [
-          InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
+          InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
           InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
           InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
           InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.type??"",),
@@ -146,43 +146,40 @@ class PlantScreenHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(image: DecorationImage(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"),fit: BoxFit.cover)),
-      child: Stack(children: [
-        Container(
-          height: size.height * 0.43,
-          // width: size.width,
-          // child: Image?.network(imageUrl)??CircularProgressIndicator(color: Colors.black,),
-        // child: NetworkImage(imageUrl) != null ? NetworkImage(imageUrl): CircularProgressIndicator()
-        decoration: BoxDecoration(
-      image: DecorationImage(
-        image: NetworkImage(imageUrl),
-        fit: BoxFit.cover,
+    return Stack(children: [
+      Container(
+        height: size.height * 0.43,
+        // width: size.width,
+        // child: Image?.network(imageUrl)??CircularProgressIndicator(color: Colors.black,),
+      // child: NetworkImage(imageUrl) != null ? NetworkImage(imageUrl): CircularProgressIndicator()
+      decoration: BoxDecoration(
+    image: DecorationImage(
+      image: NetworkImage(imageUrl),
+      fit: BoxFit.cover,
+    ),
+    ),
+      ),
+      Positioned(
+    bottom: 20,
+    left: 20,
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+     Text(
+      plantName, 
+      style: Theme.of(context).textTheme.headline4!.copyWith(
+        color: Colors.white, 
+        fontWeight: FontWeight.bold
       ),
       ),
-        ),
-        Positioned(
-      bottom: 20,
-      left: 20,
-      child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-       Text(
-        plantName, 
-        style: Theme.of(context).textTheme.headline4!.copyWith(
-          color: Colors.white, 
-          fontWeight: FontWeight.bold
-        ),
-        ),
-      //  Text(
-      //   plantCommonName,
-      //   style: Theme.of(context).textTheme.headline6!.copyWith(
-      //     color: Colors.white
-      //   )
-      // ) 
-      ],))
-      ]),
-    );
+    //  Text(
+    //   plantCommonName,
+    //   style: Theme.of(context).textTheme.headline6!.copyWith(
+    //     color: Colors.white
+    //   )
+    // ) 
+    ],))
+    ]);
   }
 }
 

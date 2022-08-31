@@ -73,37 +73,31 @@ class _CategoriesListState extends State<CategoriesList> {
           },
           child: Card(
             elevation: 10,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Colors.green, width: 3) ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30), 
+              side: BorderSide(
+                color: Colors.green, 
+                width: 4
+              )
+            ),
             child: Container(
-              margin: EdgeInsets.all(10),
               height: widget.size.height * 0.2,
-              width: widget.size.width,
-              // color: Colors.red,  
               child: Stack(
+                alignment: AlignmentDirectional.topCenter,
                 children: [
                   Positioned.fill(
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(30),
                       child: Image.asset(
                         allCategories[index].imageAddress,
-                        fit: BoxFit.cover,
+                        fit: BoxFit.contain,
                       ),
                     ), 
                   ),
                   Positioned(
-                    bottom: 1,
-                    left: 5,
-                    right: 0,
-                    child: Container(
-                      padding: EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.black
-                      ),
-                      child: Text(
-                        allCategories[index].name, 
-                        style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                    child: Text(
+                      allCategories[index].name, 
+                      style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white, fontWeight: FontWeight.bold, backgroundColor: Colors.green),
                     ))
                 ]),
             ),

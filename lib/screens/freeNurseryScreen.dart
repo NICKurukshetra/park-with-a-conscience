@@ -65,9 +65,9 @@ class _NurseryScreenState extends State<NurseryScreen> {
         itemCount: 3,
         itemBuilder: ((context, index) {
           return Container(
-            decoration: BoxDecoration(
+            // decoration: BoxDecoration(
             
-            ),
+            // ),
             child: allImages[index],
           );
         }

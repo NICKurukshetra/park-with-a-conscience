@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:park_with_conscience/screens/freeNurseryScreen.dart';
 import 'screens/homeScreen.dart';
 
@@ -15,12 +16,12 @@ class pwcApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: HomeScreen(),
-      initialRoute: "/nurseryScreen",
-      routes: {
-        // "/" : (context) => HomeScreen(),
-        "/homeScreen" :(context) => HomeScreen(),
-        "/nurseryScreen" :((context) => NurseryScreen())
-      },
+      // initialRoute: "/homeScreen",
+      // routes: {
+      //   // "/" : (context) => HomeScreen(),
+      //   "/homeScreen" :(context) => HomeScreen(),
+      //   "/nurseryScreen" :((context) => NurseryScreen())
+      // },
     );
   }
 }

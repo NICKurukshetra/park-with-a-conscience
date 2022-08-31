@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:park_with_conscience/data/homeScreenCategories.dart';
+import 'package:park_with_conscience/model/home_screen_categories.dart';
 import 'package:park_with_conscience/screens/plantScreen.dart';
 
 
@@ -8,27 +10,30 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-      elevation: 0.0,
-      backgroundColor: Colors.green,
-      leading: IconButton(
-        icon: Icon(Icons.menu), 
-        onPressed: () {  },)
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        appBar: AppBar(
+        elevation: 0.0,
+        backgroundColor: Colors.green,
+        leading: IconButton(
+          icon: Icon(Icons.menu), 
+          onPressed: () {  },)
+        ),
+        body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[ 
+            HeaderWithDropDown(size: size),
+            CategoriesList(size: size)
+          ],
+        ),
+      )
       ),
-      body: SingleChildScrollView(
-      child: Column(
-        children: <Widget>[ 
-          HeaderWithDropDown(size: size),
-          CategoriesList(size: size)
-        ],
-      ),
-    )
     );
   }
 }
 
-class CategoriesList extends StatelessWidget {
+class CategoriesList extends StatefulWidget {
   const CategoriesList({
     Key? key,
     required this.size,
@@ -37,37 +42,72 @@ class CategoriesList extends StatelessWidget {
   final Size size;
 
   @override
+  State<CategoriesList> createState() => _CategoriesListState();
+}
+
+class _CategoriesListState extends State<CategoriesList> {
+  List<Details> allCategories = [];
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    loadData();
+  }
+
+  Future loadData() async{
+    allCategories = List.of(categories);
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 4,
+      itemCount: allCategories.length,
       shrinkWrap: true,
       physics: NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) {
-        return Container(
-          margin: EdgeInsets.all(10),
-          height: size.height * 0.2,
-          width: size.width,
-          // color: Colors.red,  
-          child: Stack(
-            children: [
-              Positioned.fill(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Image.asset(
-                    "assets/images/istockphoto-1181366400-612x612.jpeg",
-                    fit: BoxFit.cover,
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => allCategories[index].screenName));
+          },
+          child: Card(
+            elevation: 10,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30), side: BorderSide(color: Colors.green, width: 3) ),
+            child: Container(
+              margin: EdgeInsets.all(10),
+              height: widget.size.height * 0.2,
+              width: widget.size.width,
+              // color: Colors.red,  
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.asset(
+                        allCategories[index].imageAddress,
+                        fit: BoxFit.cover,
+                      ),
+                    ), 
                   ),
-                ), 
-              ),
-              Positioned(
-                bottom: 10,
-                left: 10,
-                right: 0,
-                child: Text(
-                  "Category Name", 
-                  style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.white),
-                ))
-            ]),
+                  Positioned(
+                    bottom: 1,
+                    left: 5,
+                    right: 0,
+                    child: Container(
+                      padding: EdgeInsets.all(4),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.black
+                      ),
+                      child: Text(
+                        allCategories[index].name, 
+                        style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white, fontWeight: FontWeight.bold),
+                      ),
+                    ))
+                ]),
+            ),
+          ),
         );
       },);
   }
@@ -106,17 +146,22 @@ class HeaderWithDropDown extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Park",
-                style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white)
+                "Arjun Complex",
+                style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.white)
               ),
-              Text(
-                "with a ",
-                style: Theme.of(context).textTheme.subtitle1!.copyWith(color: Colors.white),
+              Row(
+                children: [
+                  Text(
+                "Park with a ",
+                style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
               ),
               Text(
                 "ConScience",
-                style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.white)
+                style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white)
               ),
+                ],
+              )
+              
             ],
           ),
           // Spacer(),
@@ -172,30 +217,31 @@ class DropDownWidget extends StatefulWidget {
 }
 
 class _DropDownWidgetState extends State<DropDownWidget> {
-  int plantCode = 0;
+  String plantCode = "";
   
   @override
   Widget build(BuildContext context) {
     int totalPlants = 28;
-    List<int> totalPlantsList = List<int>.generate(totalPlants, (i) => i , growable: true);
+    List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
     return DropdownButtonHideUnderline(
-      child: DropdownButton<int>(
+      child: DropdownButton<String>(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         elevation: 10,
-        value: plantCode,
+        hint: Text("Select Plant Code"),
+        // value: plantCode,
         isExpanded: true,
         // iconDisabledColor: Colors.green,
-        icon: const Icon(Icons.arrow_downward, color: Colors.green,),
-        items: totalPlantsList.map<DropdownMenuItem<int>>((int value) {
-          return DropdownMenuItem<int>(
+        icon: const Icon(Icons.arrow_drop_down, color: Colors.green, size: 40,),
+        items: totalPlantsList.map<DropdownMenuItem<String>>((String value) {
+          return DropdownMenuItem<String>(
             value: value,
-            child: Text("$value"),
+            child: Text("$value", style: TextStyle(fontSize: 25),),
           );
         }).toList(), 
-        onChanged: (int? newValue) {
+        onChanged: (String? newValue) {
           setState(() {
             plantCode = newValue!;
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: plantCode,)),
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: int.parse(plantCode),)),
             );
           });
         }

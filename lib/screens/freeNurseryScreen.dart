@@ -11,7 +11,21 @@ class NurseryScreen extends StatefulWidget {
 
 class _NurseryScreenState extends State<NurseryScreen> {
   bool isLoading = true;
-  List<String> imageUrls = ['https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',"https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46"];
+  List<String> imageUrls = [
+    // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+  ];
   
   List<Image> allImages = [];
 
@@ -61,7 +75,7 @@ class _NurseryScreenState extends State<NurseryScreen> {
         children: [
           // Container(height: size.height * 0.2, color: Colors.black,),
           Container(
-            child: Text("About Plant"), 
+            child: Text("About Text"), 
             height: size.height * 0.125, 
             margin: EdgeInsets.only(bottom: 10)
           ),
@@ -86,13 +100,10 @@ class ImagesGridView extends StatelessWidget {
       crossAxisCount: 3, 
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
-      itemCount: allImages.length,
+      itemCount: allImages.length - 1,
       itemBuilder: ((context, index) {
         return Container(
-          decoration: BoxDecoration(
-            color: Colors.amber
-          ),
-          child: allImages[index],
+          child: allImages[index + 1],
         );
       }
     ), 

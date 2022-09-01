@@ -42,41 +42,94 @@ class _NurseryScreenState extends State<NurseryScreen> {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(),
-      body: isLoading ? StaggeredGridView.countBuilder(
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        itemCount: 20,
-        crossAxisCount: 3,
-        staggeredTileBuilder: (index) => StaggeredTile.count(
-           (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+      body: isLoading 
+      ? Column(
+        children: [
+          Shimmer.fromColors(
+          child: Container(
+            color:Colors.black, 
+            height: size.height * 0.125, 
+            margin: EdgeInsets.only(bottom: 10)), 
+          baseColor: Color.fromARGB(149, 158, 158, 158), 
+          enabled: isLoading,
+          highlightColor: Colors.grey
         ),
-        itemBuilder: (context, index) {
-          return Shimmer.fromColors(
-            child: Container(color:Colors.black), 
-            baseColor: Color.fromARGB(149, 158, 158, 158), 
-            enabled: isLoading,
-            highlightColor: Colors.grey
-          );
-        },
-      ) : StaggeredGridView.countBuilder(
-        crossAxisCount: 3, 
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        itemCount: 3,
-        itemBuilder: ((context, index) {
-          return Container(
-            // decoration: BoxDecoration(
-            
-            // ),
-            child: allImages[index],
-          );
-        }
-      ), 
-        staggeredTileBuilder: (index) => StaggeredTile.count(
-           (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
-        ),
-
+          Expanded(child: AnimationGridView(isLoading: isLoading)),
+        ],
+      ) 
+      : Column(
+        children: [
+          // Container(height: size.height * 0.2, color: Colors.black,),
+          Container(
+            child: Text("About Plant"), 
+            height: size.height * 0.125, 
+            margin: EdgeInsets.only(bottom: 10)
+          ),
+          Expanded(child: ImagesGridView(allImages: allImages)),
+        ],
       ),
+    );
+  }
+}
+
+class ImagesGridView extends StatelessWidget {
+  const ImagesGridView({
+    Key? key,
+    required this.allImages,
+  }) : super(key: key);
+
+  final List<Image> allImages;
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGridView.countBuilder(
+      crossAxisCount: 3, 
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      itemCount: allImages.length,
+      itemBuilder: ((context, index) {
+        return Container(
+          decoration: BoxDecoration(
+            color: Colors.amber
+          ),
+          child: allImages[index],
+        );
+      }
+    ), 
+      staggeredTileBuilder: (index) => StaggeredTile.count(
+         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+      ),
+
+    );
+  }
+}
+
+class AnimationGridView extends StatelessWidget {
+  const AnimationGridView({
+    Key? key,
+    required this.isLoading,
+  }) : super(key: key);
+
+  final bool isLoading;
+
+  @override
+  Widget build(BuildContext context) {
+    return StaggeredGridView.countBuilder(
+      crossAxisSpacing: 10,
+      mainAxisSpacing: 10,
+      itemCount: 20,
+      crossAxisCount: 3,
+      staggeredTileBuilder: (index) => StaggeredTile.count(
+         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+      ),
+      itemBuilder: (context, index) {
+        return Shimmer.fromColors(
+          child: Container(color:Colors.black), 
+          baseColor: Color.fromARGB(149, 158, 158, 158), 
+          enabled: isLoading,
+          highlightColor: Colors.grey
+        );
+      },
     );
   }
 }

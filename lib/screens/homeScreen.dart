@@ -124,7 +124,7 @@ class HeaderWithDropDown extends StatelessWidget {
       child: Stack(
         children: [
     Container(
-      height: size.height * 0.2-27,
+      height: size.height * 0.175,
       // color: Colors.black,
       decoration: BoxDecoration(
         color: Colors.green,

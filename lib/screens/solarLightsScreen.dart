@@ -12,19 +12,10 @@ class SolarLightsScreen extends StatefulWidget {
 class _SolarLightsScreenState extends State<SolarLightsScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
+    "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
+    "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB"
+
   ];
   
   List<Image> allImages = [];
@@ -75,7 +66,7 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
         children: [
           // Container(height: size.height * 0.2, color: Colors.black,),
           Container(
-            child: Text("About Text"), 
+            child: Text("Solar Lights"), 
             height: size.height * 0.125, 
             margin: EdgeInsets.only(bottom: 10)
           ),
@@ -108,7 +99,7 @@ class ImagesGridView extends StatelessWidget {
       }
     ), 
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
 
     );
@@ -131,7 +122,7 @@ class AnimationGridView extends StatelessWidget {
       itemCount: 20,
       crossAxisCount: 3,
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(

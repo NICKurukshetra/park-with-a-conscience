@@ -13,18 +13,13 @@ class _GatesScreenState extends State<GatesScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
     // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=11zhlGl23vo1tZikjJBihkEvqgfCDEBmy", 
+    "https://drive.google.com/uc?id=1K1ckzgHJJ6IMk0SinMvL-LSKjB8u3sMp", 
+    "https://drive.google.com/uc?id=1QqvPviiEd4Z9pFr3DHAsLVAEPf9slYD2", 
+    "https://drive.google.com/uc?id=1UjA1aYwn8Nf9-pr4Lbxc7SSHm6KNISV3", 
+    "https://drive.google.com/uc?id=1ccvO97i8HJY8YEXGIsGj5cbUNMVbvcpZ", 
+    "https://drive.google.com/uc?id=1pOrngHVlQpM0WFN8YvDkIlIEPMFNdkbZ", 
+    "https://drive.google.com/uc?id=1qH46fFcBSv5s6HDPoG-DGv-vTR8lb9GL"
   ];
   
   List<Image> allImages = [];
@@ -108,7 +103,7 @@ class ImagesGridView extends StatelessWidget {
       }
     ), 
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
 
     );
@@ -131,7 +126,7 @@ class AnimationGridView extends StatelessWidget {
       itemCount: 20,
       crossAxisCount: 3,
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(

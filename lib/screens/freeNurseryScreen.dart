@@ -12,19 +12,19 @@ class NurseryScreen extends StatefulWidget {
 class _NurseryScreenState extends State<NurseryScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    
+    "https://drive.google.com/uc?id=10wuAGbkpu313I2s1AXtr8mVTlwPigql_", 
+    "https://drive.google.com/uc?id=19kNMIPeFKMY1cvd9TvSWEzVRYOLDJsgI", 
+    "https://drive.google.com/uc?id=1FO5zSWFKs_ia9C2tFa-y3988wnxi6CGu", 
+    "https://drive.google.com/uc?id=1J_fmOP0Q_DrslGU3pIwk_EwmCXUvz1iT", 
+    "https://drive.google.com/uc?id=1MmWSZGkivKEBsEeot_PtpWTiLKt95Dbq", 
+    "https://drive.google.com/uc?id=1fRDkRZrND-3TFbqidC5DQVlVqk2u_Tea", 
+    "https://drive.google.com/uc?id=1mPVQnYKnxKCEd37kbRWYraa6PfS037A8", 
+    "https://drive.google.com/uc?id=1oq8E-ds_fel0sNcfMOYjpQUEBKEO04Gb", 
+    "https://drive.google.com/uc?id=1q9AucKiLJ4G8NK_JM_nCTES7S0PCZoxn", 
+    "https://drive.google.com/uc?id=1rGN4-Uu0TOHPb7nj0pQSubtu5b4XH8PL", 
+    "https://drive.google.com/uc?id=1rir0FlURfU4Hqj90fcasEYyqPeM2YSER", 
+    "https://drive.google.com/uc?id=1tto3_y8tsXI3zyj1YLzVztmvYZ3Qb1Wp"
   ];
   
   List<Image> allImages = [];
@@ -54,33 +54,36 @@ class _NurseryScreenState extends State<NurseryScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(),
-      body: isLoading 
-      ? Column(
-        children: [
-          Shimmer.fromColors(
-          child: Container(
-            color:Colors.black, 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)), 
-          baseColor: Color.fromARGB(149, 158, 158, 158), 
-          enabled: isLoading,
-          highlightColor: Colors.grey
-        ),
-          Expanded(child: AnimationGridView(isLoading: isLoading)),
-        ],
-      ) 
-      : Column(
-        children: [
-          // Container(height: size.height * 0.2, color: Colors.black,),
-          Container(
-            child: Text("About Text"), 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        // appBar: AppBar(),
+        body: isLoading 
+        ? Column(
+          children: [
+            Shimmer.fromColors(
+            child: Container(
+              color:Colors.black, 
+              height: size.height * 0.125, 
+              margin: EdgeInsets.only(bottom: 10)), 
+            baseColor: Color.fromARGB(149, 158, 158, 158), 
+            enabled: isLoading,
+            highlightColor: Colors.grey
           ),
-          Expanded(child: ImagesGridView(allImages: allImages)),
-        ],
+            Expanded(child: AnimationGridView(isLoading: isLoading)),
+          ],
+        ) 
+        : Column(
+          children: [
+            // Container(height: size.height * 0.2, color: Colors.black,),
+            Container(
+              child: Text("About Text"), 
+              height: size.height * 0.125, 
+              margin: EdgeInsets.only(bottom: 10)
+            ),
+            Expanded(child: ImagesGridView(allImages: allImages)),
+          ],
+        ),
       ),
     );
   }
@@ -108,7 +111,7 @@ class ImagesGridView extends StatelessWidget {
       }
     ), 
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
 
     );
@@ -131,7 +134,7 @@ class AnimationGridView extends StatelessWidget {
       itemCount: 20,
       crossAxisCount: 3,
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(

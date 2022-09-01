@@ -12,19 +12,19 @@ class DrainageScreen extends StatefulWidget {
 class _DrainageScreenState extends State<DrainageScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    
+    "https://drive.google.com/uc?id=1CVflbhrTk80sQ5c2FU7ytGHCbo-UabBR", 
+    "https://drive.google.com/uc?id=1I3q1fp2ShkjL1dJaXdA3VsZWjpNJP9pz", 
+    "https://drive.google.com/uc?id=1M_O-zfGcgMaBtligKbPq8AeOVKgt4h-i", 
+    "https://drive.google.com/uc?id=1Vtf3r7l8X_bl4X7LukA8-tM_sRLprwuL", 
+    "https://drive.google.com/uc?id=1ZUqUdyxKk29B37dgtEddFV-x6XstXdSx", 
+    "https://drive.google.com/uc?id=1Z_zCopL0EgAdAiY5bnJbDCCAUvWHuqf-", 
+    "https://drive.google.com/uc?id=1dFBIMnpqzkrOdH7ysLjmlJ4uJxZsm1Uh", 
+    "https://drive.google.com/uc?id=1dkMiLLunYX5FCZB7WNtd7cLMdzsdqhyH", 
+    "https://drive.google.com/uc?id=1hpl9WPgLy4tJRqBuQIkcIHDIbb6gWW8d", 
+    "https://drive.google.com/uc?id=1pcsKUQHZYbncnOOFeLYt2oZbOur4RdlL", 
+    "https://drive.google.com/uc?id=1q9ISqe6s5-KiNHkIcHP6Ea85vCFp2DXS", 
+    "https://drive.google.com/uc?id=1wsgml0jI6brKiMKGT-5rzZjda0b-9GoA"
   ];
   
   List<Image> allImages = [];
@@ -108,7 +108,7 @@ class ImagesGridView extends StatelessWidget {
       }
     ), 
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
 
     );
@@ -131,7 +131,7 @@ class AnimationGridView extends StatelessWidget {
       itemCount: 20,
       crossAxisCount: 3,
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(

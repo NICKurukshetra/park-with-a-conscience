@@ -12,19 +12,17 @@ class CompostPitScreen extends StatefulWidget {
 class _CompostPitScreenState extends State<CompostPitScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    // 'https://drive.google.com/uc?id=16SToMgqFqPen737R0s5qJTPpWUGDa8B4',
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
-    "https://drive.google.com/uc?id=1pF59wpclzaYGTfYGGLKmQj96LL4_aV46",
+    "https://drive.google.com/uc?id=12Ze9KWBm5N5gQAepgJQ6t5eRoEKYQbV0", 
+    "https://drive.google.com/uc?id=13B-3XTEMJelancxsIm_nuqceJax0nbXh", 
+    "https://drive.google.com/uc?id=1F_cVnouLmD1dcZI0rOMPPsPLb0INBcdb", 
+    "https://drive.google.com/uc?id=1I3O0GfjAWFCiXruo8HN-VdJYukNOrTFr", 
+    "https://drive.google.com/uc?id=1J1OK-XuuicvPGfLj00SYIsRMKEoKyszv", 
+    "https://drive.google.com/uc?id=1L56B3a1c8mjIhaGzdXjhxPSwNbQCOmjV", 
+    "https://drive.google.com/uc?id=1MA8DtdJi_NQMILm84QcTvBf40Q3bMNTo", 
+    "https://drive.google.com/uc?id=1OeTdPUw331O2LIYXi44eaIGxMVtpcwUn", 
+    "https://drive.google.com/uc?id=1R1ZG7oR0K1RRVDm2iKefx585CC454X4D", 
+    "https://drive.google.com/uc?id=1iJTxrr3WniCehc93ppKoUI63qPS3aRZt", 
+    "https://drive.google.com/uc?id=1jOilNYzslmzWLL7thYnhQk5VJw3Dirkt"
   ];
   
   List<Image> allImages = [];
@@ -108,7 +106,7 @@ class ImagesGridView extends StatelessWidget {
       }
     ), 
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
 
     );
@@ -131,7 +129,7 @@ class AnimationGridView extends StatelessWidget {
       itemCount: 20,
       crossAxisCount: 3,
       staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
+         (index % 5 == 0) ? 2 : 1, (index % 5 == 0) ? 2 : 1
       ),
       itemBuilder: (context, index) {
         return Shimmer.fromColors(

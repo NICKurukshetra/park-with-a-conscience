@@ -13,13 +13,13 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Colors.green,
-        leading: IconButton(
-          icon: Icon(Icons.menu), 
-          onPressed: () {  },)
-        ),
+        // appBar: AppBar(
+        // elevation: 0.0,
+        // backgroundColor: Colors.green,
+        // leading: IconButton(
+        //   icon: Icon(Icons.menu), 
+        //   onPressed: () {  },)
+        // ),
         body: SingleChildScrollView(
         child: Column(
           children: <Widget>[ 
@@ -76,14 +76,14 @@ class _CategoriesListState extends State<CategoriesList> {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30), 
               side: BorderSide(
-                color: Colors.green, 
+                color: Colors.black, 
                 width: 4
               )
             ),
             child: Container(
               height: widget.size.height * 0.2,
               child: Stack(
-                alignment: AlignmentDirectional.topCenter,
+                alignment: AlignmentDirectional.bottomCenter,
                 children: [
                   Positioned.fill(
                     child: ClipRRect(
@@ -97,7 +97,11 @@ class _CategoriesListState extends State<CategoriesList> {
                   Positioned(
                     child: Text(
                       allCategories[index].name, 
-                      style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white, fontWeight: FontWeight.bold, backgroundColor: Colors.green),
+                      style: Theme.of(context).textTheme.headline5!
+                      .copyWith(color: Colors.black, 
+                      fontWeight: FontWeight.bold, 
+                      backgroundColor: Colors.white
+                      ),
                     ))
                 ]),
             ),
@@ -118,16 +122,20 @@ class HeaderWithDropDown extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-    margin: EdgeInsets.only(bottom: 50),
-      height: size.height * 0.2,
-      color: Colors.white,
+      margin: EdgeInsets.only(bottom: 50),
+      height: size.height * 0.27,
+      // color: Colors.white,
       child: Stack(
         children: [
     Container(
-      height: size.height * 0.175,
+      height: size.height * 0.245,
       // color: Colors.black,
       decoration: BoxDecoration(
-        color: Colors.green,
+        // color: Colors.green,
+        image: DecorationImage(
+          image: AssetImage("assets/images/park.jpeg"),
+          fit: BoxFit.cover
+        ),
         borderRadius: BorderRadius.only(
           bottomLeft: Radius.circular(36),
           bottomRight: Radius.circular(36)
@@ -141,17 +149,22 @@ class HeaderWithDropDown extends StatelessWidget {
             children: [
               Text(
                 "Arjun Complex",
-                style: Theme.of(context).textTheme.headline4!.copyWith(color: Colors.white)
+                style: Theme.of(context).textTheme.headline4!
+                .copyWith(
+                  color: Colors.white, 
+                  fontWeight: FontWeight.bold,
+                  // backgroundColor: Colors.white,
+                )
               ),
               Row(
                 children: [
                   Text(
                 "Park with a ",
-                style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.white),
+                style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.black),
               ),
               Text(
                 "ConScience",
-                style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.white)
+                style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.black)
               ),
                 ],
               )

@@ -59,7 +59,7 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: isLoading 
       ? Column(
         children: [
@@ -79,7 +79,9 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
         children: [
           // Container(height: size.height * 0.2, color: Colors.black,),
           Container(
-            child: Text("Solar Lights"), 
+            child: Text(
+              "Solar powered outdoor light, no electricity required, No Wire Needed, Automatic Lighting - Auto on at night(On detection of Motion) / auto off at sunrise; Light activates only when sensing motion at night. This acts as a security light, The light lasts for 8-10 hours if fully charged"
+            ), 
             height: size.height * 0.125, 
             margin: EdgeInsets.only(bottom: 10)
           ),

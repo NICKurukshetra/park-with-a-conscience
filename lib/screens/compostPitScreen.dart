@@ -73,7 +73,9 @@ class _CompostPitScreenState extends State<CompostPitScreen> {
         children: [
           // Container(height: size.height * 0.2, color: Colors.black,),
           Container(
-            child: Text("About Text"), 
+            child: Text(
+              "methods of composting organic material for the garden, Once the pit is filled with enough compostable material. Compost pit requires three things - Oxygen, Sunlight and waste. People provide waste from their homes, The pit is made in such a place where sunlight is sufficiently present, and the pit has big holes on sides to provide oxygen."
+            ), 
             height: size.height * 0.125, 
             margin: EdgeInsets.only(bottom: 10)
           ),

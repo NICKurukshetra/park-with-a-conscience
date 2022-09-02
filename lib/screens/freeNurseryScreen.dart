@@ -77,7 +77,7 @@ class _NurseryScreenState extends State<NurseryScreen> {
           children: [
             // Container(height: size.height * 0.2, color: Colors.black,),
             Container(
-              child: Text("About Text"), 
+              child: Text("Free Nursery, Anyone can take any plant they want. No cost nursery. Plants are grown using already existing plants."), 
               height: size.height * 0.125, 
               margin: EdgeInsets.only(bottom: 10)
             ),

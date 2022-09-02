@@ -55,7 +55,7 @@ class _DrainageScreenState extends State<DrainageScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(),
+      // appBar: AppBar(),
       body: isLoading 
       ? Column(
         children: [

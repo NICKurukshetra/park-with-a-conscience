@@ -97,7 +97,9 @@ class _SprinklerScreenState extends State<SprinklerScreen> {
         children: [
           // Container(height: size.height * 0.2, color: Colors.black,),
           Container(
-            child: Text("About Text"), 
+            child: Text(
+              "High pressure , anti-aging , high temperature resistance . Not easily deformed , reliable opening and long service life . Not only greatly save the cost of sporaying but also has pretty quality . Made in ​Engering material . 90/180/360 Degree spray for you choose.90 Degree Spray Blue Nozzle Working pressure : 150kPa~300kPa Flow Rate : 20~30 L/H Radius Range : 1~1.5 meter"
+            ), 
             height: size.height * 0.125, 
             margin: EdgeInsets.only(bottom: 10)
           ),

@@ -17,23 +17,23 @@ List<Details> categories = [
     screenName: SprinklerScreen() 
   ), 
   Details( 
-    name: "Free Nurrery", 
-    imageAddress: "assets/images/day:night SolarLights.png", 
+    name: "Free Nursery", 
+    imageAddress: "assets/images/nursery.heic", 
     screenName: NurseryScreen() 
   ), 
   Details( 
     name: "Entry Gates", 
-    imageAddress: "assets/images/day:night SolarLights.png", 
+    imageAddress: "assets/images/gate.jpeg", 
     screenName: GatesScreen() 
   ), 
   Details( 
     name: "Drainage", 
-    imageAddress: "assets/images/day:night SolarLights.png", 
+    imageAddress: "assets/images/drainage.jpeg", 
     screenName: DrainageScreen() 
   ), 
   Details( 
     name: "Compost pit", 
-    imageAddress: "assets/images/day:night SolarLights.png", 
+    imageAddress: "assets/images/compostPit.jpeg", 
     screenName: CompostPitScreen() 
   ), 
   

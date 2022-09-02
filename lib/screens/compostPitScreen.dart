@@ -12,17 +12,23 @@ class CompostPitScreen extends StatefulWidget {
 class _CompostPitScreenState extends State<CompostPitScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    "https://drive.google.com/uc?id=12Ze9KWBm5N5gQAepgJQ6t5eRoEKYQbV0", 
-    "https://drive.google.com/uc?id=13B-3XTEMJelancxsIm_nuqceJax0nbXh", 
-    "https://drive.google.com/uc?id=1F_cVnouLmD1dcZI0rOMPPsPLb0INBcdb", 
-    "https://drive.google.com/uc?id=1I3O0GfjAWFCiXruo8HN-VdJYukNOrTFr", 
-    "https://drive.google.com/uc?id=1J1OK-XuuicvPGfLj00SYIsRMKEoKyszv", 
-    "https://drive.google.com/uc?id=1L56B3a1c8mjIhaGzdXjhxPSwNbQCOmjV", 
-    "https://drive.google.com/uc?id=1MA8DtdJi_NQMILm84QcTvBf40Q3bMNTo", 
-    "https://drive.google.com/uc?id=1OeTdPUw331O2LIYXi44eaIGxMVtpcwUn", 
-    "https://drive.google.com/uc?id=1R1ZG7oR0K1RRVDm2iKefx585CC454X4D", 
-    "https://drive.google.com/uc?id=1iJTxrr3WniCehc93ppKoUI63qPS3aRZt", 
-    "https://drive.google.com/uc?id=1jOilNYzslmzWLL7thYnhQk5VJw3Dirkt"
+    "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
+    "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
+    "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+
   ];
   
   List<Image> allImages = [];
@@ -39,7 +45,7 @@ class _CompostPitScreenState extends State<CompostPitScreen> {
     Image _image = Image(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"));
     allImages.add(_image);
     for(String url in imageUrls) {
-      _image = Image.network(url.toString());
+      _image = Image.network(url.toString(), fit: BoxFit.cover,);
       allImages.add(_image);
     }
     _image.image.resolve(ImageConfiguration())
@@ -52,35 +58,63 @@ class _CompostPitScreenState extends State<CompostPitScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(),
-      body: isLoading 
-      ? Column(
-        children: [
-          Shimmer.fromColors(
-          child: Container(
-            color:Colors.black, 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)), 
-          baseColor: Color.fromARGB(149, 158, 158, 158), 
-          enabled: isLoading,
-          highlightColor: Colors.grey
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Solar Lights"),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey,
+          
         ),
-          Expanded(child: AnimationGridView(isLoading: isLoading)),
-        ],
-      ) 
-      : Column(
-        children: [
-          // Container(height: size.height * 0.2, color: Colors.black,),
-          Container(
-            child: Text(
-              "methods of composting organic material for the garden, Once the pit is filled with enough compostable material. Compost pit requires three things - Oxygen, Sunlight and waste. People provide waste from their homes, The pit is made in such a place where sunlight is sufficiently present, and the pit has big holes on sides to provide oxygen."
-            ), 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)
+        body: isLoading 
+        ? Column(
+          children: [
+            Shimmer.fromColors(
+            child: Container(
+              color:Colors.black, 
+              height: size.height * 0.125, 
+              margin: EdgeInsets.only(bottom: 10)), 
+            baseColor: Color.fromARGB(149, 158, 158, 158), 
+            enabled: isLoading,
+            highlightColor: Colors.grey
           ),
-          Expanded(child: ImagesGridView(allImages: allImages)),
-        ],
+            Expanded(child: AnimationGridView(isLoading: isLoading)),
+          ],
+        ) 
+        : SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(height: size.height * 0.2, color: Colors.black,),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Colors.green.withOpacity(.6),
+                Colors.white.withOpacity(.6),
+                // Colors.green.withOpacity(.4),
+                // Color.fromARGB(255, 235, 217, 162).withOpacity(.3),
+              ]
+                ),),
+                //color: Colors.white,
+                padding: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                  style: Theme.of(context).textTheme.bodySmall!
+                  .copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 18
+                  )
+                ), 
+                height: size.height * 0.2, 
+                // margin: EdgeInsets.only(bottom: 10)
+              ),
+              ImagesGridView(allImages: allImages),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -97,6 +131,8 @@ class ImagesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 3, 
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,

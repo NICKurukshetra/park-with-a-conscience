@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,19 +15,19 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
     "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
     "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
     "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    // "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
 
   ];
   
@@ -66,7 +64,7 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
         appBar: AppBar(
           title: Text("Solar Lights"),
           foregroundColor: Colors.white,
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.blueGrey,
           
         ),
         body: isLoading 

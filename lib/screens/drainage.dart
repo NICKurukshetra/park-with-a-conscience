@@ -12,19 +12,23 @@ class DrainageScreen extends StatefulWidget {
 class _DrainageScreenState extends State<DrainageScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    
-    "https://drive.google.com/uc?id=1CVflbhrTk80sQ5c2FU7ytGHCbo-UabBR", 
-    "https://drive.google.com/uc?id=1I3q1fp2ShkjL1dJaXdA3VsZWjpNJP9pz", 
-    "https://drive.google.com/uc?id=1M_O-zfGcgMaBtligKbPq8AeOVKgt4h-i", 
-    "https://drive.google.com/uc?id=1Vtf3r7l8X_bl4X7LukA8-tM_sRLprwuL", 
-    "https://drive.google.com/uc?id=1ZUqUdyxKk29B37dgtEddFV-x6XstXdSx", 
-    "https://drive.google.com/uc?id=1Z_zCopL0EgAdAiY5bnJbDCCAUvWHuqf-", 
-    "https://drive.google.com/uc?id=1dFBIMnpqzkrOdH7ysLjmlJ4uJxZsm1Uh", 
-    "https://drive.google.com/uc?id=1dkMiLLunYX5FCZB7WNtd7cLMdzsdqhyH", 
-    "https://drive.google.com/uc?id=1hpl9WPgLy4tJRqBuQIkcIHDIbb6gWW8d", 
-    "https://drive.google.com/uc?id=1pcsKUQHZYbncnOOFeLYt2oZbOur4RdlL", 
-    "https://drive.google.com/uc?id=1q9ISqe6s5-KiNHkIcHP6Ea85vCFp2DXS", 
-    "https://drive.google.com/uc?id=1wsgml0jI6brKiMKGT-5rzZjda0b-9GoA"
+    "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
+    "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
+    "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+
   ];
   
   List<Image> allImages = [];
@@ -41,7 +45,7 @@ class _DrainageScreenState extends State<DrainageScreen> {
     Image _image = Image(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"));
     allImages.add(_image);
     for(String url in imageUrls) {
-      _image = Image.network(url.toString());
+      _image = Image.network(url.toString(), fit: BoxFit.cover,);
       allImages.add(_image);
     }
     _image.image.resolve(ImageConfiguration())
@@ -54,33 +58,63 @@ class _DrainageScreenState extends State<DrainageScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      // appBar: AppBar(),
-      body: isLoading 
-      ? Column(
-        children: [
-          Shimmer.fromColors(
-          child: Container(
-            color:Colors.black, 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)), 
-          baseColor: Color.fromARGB(149, 158, 158, 158), 
-          enabled: isLoading,
-          highlightColor: Colors.grey
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Solar Lights"),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey,
+          
         ),
-          Expanded(child: AnimationGridView(isLoading: isLoading)),
-        ],
-      ) 
-      : Column(
-        children: [
-          // Container(height: size.height * 0.2, color: Colors.black,),
-          Container(
-            child: Text("About Text"), 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)
+        body: isLoading 
+        ? Column(
+          children: [
+            Shimmer.fromColors(
+            child: Container(
+              color:Colors.black, 
+              height: size.height * 0.125, 
+              margin: EdgeInsets.only(bottom: 10)), 
+            baseColor: Color.fromARGB(149, 158, 158, 158), 
+            enabled: isLoading,
+            highlightColor: Colors.grey
           ),
-          Expanded(child: ImagesGridView(allImages: allImages)),
-        ],
+            Expanded(child: AnimationGridView(isLoading: isLoading)),
+          ],
+        ) 
+        : SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(height: size.height * 0.2, color: Colors.black,),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Colors.green.withOpacity(.6),
+                Colors.white.withOpacity(.6),
+                // Colors.green.withOpacity(.4),
+                // Color.fromARGB(255, 235, 217, 162).withOpacity(.3),
+              ]
+                ),),
+                //color: Colors.white,
+                padding: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                  style: Theme.of(context).textTheme.bodySmall!
+                  .copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 18
+                  )
+                ), 
+                height: size.height * 0.2, 
+                // margin: EdgeInsets.only(bottom: 10)
+              ),
+              ImagesGridView(allImages: allImages),
+            ],
+          ),
+        ),
       ),
     );
   }
@@ -97,6 +131,8 @@ class ImagesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 3, 
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,

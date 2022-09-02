@@ -12,19 +12,23 @@ class NurseryScreen extends StatefulWidget {
 class _NurseryScreenState extends State<NurseryScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
-    
-    "https://drive.google.com/uc?id=10wuAGbkpu313I2s1AXtr8mVTlwPigql_", 
-    "https://drive.google.com/uc?id=19kNMIPeFKMY1cvd9TvSWEzVRYOLDJsgI", 
-    "https://drive.google.com/uc?id=1FO5zSWFKs_ia9C2tFa-y3988wnxi6CGu", 
-    "https://drive.google.com/uc?id=1J_fmOP0Q_DrslGU3pIwk_EwmCXUvz1iT", 
-    "https://drive.google.com/uc?id=1MmWSZGkivKEBsEeot_PtpWTiLKt95Dbq", 
-    "https://drive.google.com/uc?id=1fRDkRZrND-3TFbqidC5DQVlVqk2u_Tea", 
-    "https://drive.google.com/uc?id=1mPVQnYKnxKCEd37kbRWYraa6PfS037A8", 
-    "https://drive.google.com/uc?id=1oq8E-ds_fel0sNcfMOYjpQUEBKEO04Gb", 
-    "https://drive.google.com/uc?id=1q9AucKiLJ4G8NK_JM_nCTES7S0PCZoxn", 
-    "https://drive.google.com/uc?id=1rGN4-Uu0TOHPb7nj0pQSubtu5b4XH8PL", 
-    "https://drive.google.com/uc?id=1rir0FlURfU4Hqj90fcasEYyqPeM2YSER", 
-    "https://drive.google.com/uc?id=1tto3_y8tsXI3zyj1YLzVztmvYZ3Qb1Wp"
+    "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
+    "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
+    "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+    "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
+
   ];
   
   List<Image> allImages = [];
@@ -41,7 +45,7 @@ class _NurseryScreenState extends State<NurseryScreen> {
     Image _image = Image(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"));
     allImages.add(_image);
     for(String url in imageUrls) {
-      _image = Image.network(url.toString());
+      _image = Image.network(url.toString(), fit: BoxFit.cover,);
       allImages.add(_image);
     }
     _image.image.resolve(ImageConfiguration())
@@ -57,7 +61,12 @@ class _NurseryScreenState extends State<NurseryScreen> {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        // appBar: AppBar(),
+        appBar: AppBar(
+          title: Text("Solar Lights"),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey,
+          
+        ),
         body: isLoading 
         ? Column(
           children: [
@@ -73,16 +82,38 @@ class _NurseryScreenState extends State<NurseryScreen> {
             Expanded(child: AnimationGridView(isLoading: isLoading)),
           ],
         ) 
-        : Column(
-          children: [
-            // Container(height: size.height * 0.2, color: Colors.black,),
-            Container(
-              child: Text("Free Nursery, Anyone can take any plant they want. No cost nursery. Plants are grown using already existing plants."), 
-              height: size.height * 0.125, 
-              margin: EdgeInsets.only(bottom: 10)
-            ),
-            Expanded(child: ImagesGridView(allImages: allImages)),
-          ],
+        : SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(height: size.height * 0.2, color: Colors.black,),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Colors.green.withOpacity(.6),
+                Colors.white.withOpacity(.6),
+                // Colors.green.withOpacity(.4),
+                // Color.fromARGB(255, 235, 217, 162).withOpacity(.3),
+              ]
+                ),),
+                //color: Colors.white,
+                padding: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                  style: Theme.of(context).textTheme.bodySmall!
+                  .copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 18
+                  )
+                ), 
+                height: size.height * 0.2, 
+                // margin: EdgeInsets.only(bottom: 10)
+              ),
+              ImagesGridView(allImages: allImages),
+            ],
+          ),
         ),
       ),
     );
@@ -100,6 +131,8 @@ class ImagesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 3, 
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,
@@ -151,38 +184,3 @@ class AnimationGridView extends StatelessWidget {
 
 
 
-
-/*
-StaggeredGridView.countBuilder(
-        crossAxisCount: 3, 
-        itemCount: 20,
-        itemBuilder: ((context, index) {
-          return Container(color: Colors.amber, height: size.height*0.2, margin: EdgeInsets.all(10),);
-        }), 
-        staggeredTileBuilder: (index) => StaggeredTile.count(
-           (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
-        ),
-
-      ),
-
-
-
-
-
-
- ListWheelScrollView(
-        itemExtent: 250,
-        physics: FixedExtentScrollPhysics(),
-        perspective: 0.001,
-        children: [
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-          Container(color: Colors.amber,height: size.height*0.2,margin: EdgeInsets.only(bottom: 10),),
-        ]),
-*/

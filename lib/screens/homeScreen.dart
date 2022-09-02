@@ -98,9 +98,10 @@ class _CategoriesListState extends State<CategoriesList> {
                     child: Text(
                       allCategories[index].name, 
                       style: Theme.of(context).textTheme.headline5!
-                      .copyWith(color: Colors.black, 
-                      fontWeight: FontWeight.bold, 
-                      backgroundColor: Colors.white
+                      .copyWith(
+                        color: Colors.black, 
+                        fontWeight: FontWeight.bold, 
+                        backgroundColor: Color.fromARGB(200, 255, 255, 255)
                       ),
                     ))
                 ]),
@@ -151,9 +152,10 @@ class HeaderWithDropDown extends StatelessWidget {
                 "Arjun Complex",
                 style: Theme.of(context).textTheme.headline5!
                 .copyWith(
-                  color: Colors.black,
-                  backgroundColor: Colors.white, 
+                  color: Colors.white,
+                  backgroundColor: Color.fromARGB(150, 0, 0, 0), 
                   fontWeight: FontWeight.bold,
+                  
                   // backgroundColor: Colors.white,
                 )
               ),
@@ -163,8 +165,8 @@ class HeaderWithDropDown extends StatelessWidget {
                 "Park with a ConScience",
                 style: Theme.of(context).textTheme.headline6!
                 .copyWith(
-                  color: Colors.black,
-                  backgroundColor: Colors.white, 
+                  color: Colors.white,
+                  backgroundColor: Color.fromARGB(150, 0, 0, 0),  
                 ),
               ),
                 ],

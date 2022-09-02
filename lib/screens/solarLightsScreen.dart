@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:shimmer/shimmer.dart';
@@ -61,6 +63,12 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
     return SafeArea(
       bottom: false,
       child: Scaffold(
+        appBar: AppBar(
+          title: Text("Solar Lights"),
+          foregroundColor: Colors.white,
+          backgroundColor: Colors.grey,
+          
+        ),
         body: isLoading 
         ? Column(
           children: [
@@ -76,26 +84,38 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
             Expanded(child: AnimationGridView(isLoading: isLoading)),
           ],
         ) 
-        : Column(
-          children: [
-            // Container(height: size.height * 0.2, color: Colors.black,),
-            Container(
-              color: Colors.black,
-              padding: EdgeInsets.only(left: 10),
-              child: Text(
-                "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
-                style: Theme.of(context).textTheme.bodySmall!
-                .copyWith(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  
-                )
-              ), 
-              height: size.height * 0.125, 
-              // margin: EdgeInsets.only(bottom: 10)
-            ),
-            Expanded(child: ImagesGridView(allImages: allImages)),
-          ],
+        : SingleChildScrollView(
+          child: Column(
+            children: [
+              // Container(height: size.height * 0.2, color: Colors.black,),
+              Container(
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(colors: [
+                Colors.green.withOpacity(.6),
+                Colors.white.withOpacity(.6),
+                // Colors.green.withOpacity(.4),
+                // Color.fromARGB(255, 235, 217, 162).withOpacity(.3),
+              ]
+                ),),
+                //color: Colors.white,
+                padding: EdgeInsets.only(left: 10),
+                margin: EdgeInsets.only(top: 10),
+                child: Text(
+                  "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                  style: Theme.of(context).textTheme.bodySmall!
+                  .copyWith(
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontStyle: FontStyle.italic,
+                    fontSize: 18
+                  )
+                ), 
+                height: size.height * 0.2, 
+                // margin: EdgeInsets.only(bottom: 10)
+              ),
+              ImagesGridView(allImages: allImages),
+            ],
+          ),
         ),
       ),
     );
@@ -113,6 +133,8 @@ class ImagesGridView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StaggeredGridView.countBuilder(
+      shrinkWrap: true,
+      physics: NeverScrollableScrollPhysics(),
       crossAxisCount: 3, 
       crossAxisSpacing: 10,
       mainAxisSpacing: 10,

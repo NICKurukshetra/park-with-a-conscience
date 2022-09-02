@@ -149,71 +149,30 @@ class PlantScreenHeader extends StatelessWidget {
     return Stack(children: [
       Container(
         height: size.height * 0.43,
-        // width: size.width,
-        // child: Image?.network(imageUrl)??CircularProgressIndicator(color: Colors.black,),
-      // child: NetworkImage(imageUrl) != null ? NetworkImage(imageUrl): CircularProgressIndicator()
-      decoration: BoxDecoration(
-    image: DecorationImage(
-      image: NetworkImage(imageUrl),
-      fit: BoxFit.cover,
-    ),
-    ),
+        decoration: BoxDecoration(
+          image: DecorationImage(
+          image: NetworkImage(imageUrl),
+          fit: BoxFit.cover,
+          ),
+        ),
       ),
       Positioned(
-    bottom: 20,
-    left: 20,
-    child: Column(
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-     Text(
-      plantName, 
-      style: Theme.of(context).textTheme.headline4!.copyWith(
-        color: Colors.white, 
-        fontWeight: FontWeight.bold
-      ),
-      ),
-    //  Text(
-    //   plantCommonName,
-    //   style: Theme.of(context).textTheme.headline6!.copyWith(
-    //     color: Colors.white
-    //   )
-    // ) 
+        bottom: 20,
+        left: 20,
+        child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            plantName, 
+            style: Theme.of(context).textTheme.headline4!.copyWith(
+              color: Colors.white, 
+              fontWeight: FontWeight.bold
+            ),
+          ),
     ],))
     ]);
   }
 }
-
-
-//   class PlantInfoGrid extends StatelessWidget {
-//   const PlantInfoGrid({
-//     Key? key,
-//     required this.size,
-//   }) : super(key: key);
-
-//   final Size size;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return Expanded(
-//       child: GridView.count(
-//         physics: NeverScrollableScrollPhysics(),
-//         crossAxisCount: 3,
-//         padding: EdgeInsets.all(10),
-//         mainAxisSpacing: 15,
-//         crossAxisSpacing: 15,
-//         children: [
-//           InfoCard(size: size, cardName: 'light needs', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: '',),
-//           InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,),
-//           InfoCard(size: size, cardName: 'temperature', icon: Icons.thermostat, iconColor: Colors.orange,),
-//           InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,),
-//           InfoCard(size: size, cardName: 'maintainance', icon: Icons.content_cut, iconColor: Colors.blueGrey,),
-//           InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,),
-//         ],
-        
-//       ),
-//     );
-//   }
-// }
 
 class InfoCard extends StatelessWidget {
   const InfoCard({

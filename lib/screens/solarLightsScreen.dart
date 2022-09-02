@@ -12,6 +12,9 @@ class SolarLightsScreen extends StatefulWidget {
 class _SolarLightsScreenState extends State<SolarLightsScreen> {
   bool isLoading = true;
   List<String> imageUrls = [
+    "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
+    "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
+    "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5ga8nSH9m8N7MfB",
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
@@ -25,9 +28,6 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
     "https://cdn.s3waas.gov.in/s3248e844336797ec98478f85e7626de4a/uploads/2022/01/2022011919.jpg",
-    // "https://drive.google.com/uc?id=10uKmuCaRPC9odfJFMuufLwW2IttCNevQ", 
-    // "https://drive.google.com/uc?id=1BbGCVZDt_qQUCBE-uO6zkfvsB8PGmft6", 
-    // "https://drive.google.com/uc?id=1iALWE5y7qCcOyKHPh5g a8nSH9m8N7MfB"
 
   ];
   
@@ -58,35 +58,45 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      // appBar: AppBar(),
-      body: isLoading 
-      ? Column(
-        children: [
-          Shimmer.fromColors(
-          child: Container(
-            color:Colors.black, 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)), 
-          baseColor: Color.fromARGB(149, 158, 158, 158), 
-          enabled: isLoading,
-          highlightColor: Colors.grey
-        ),
-          Expanded(child: AnimationGridView(isLoading: isLoading)),
-        ],
-      ) 
-      : Column(
-        children: [
-          // Container(height: size.height * 0.2, color: Colors.black,),
-          Container(
-            child: Text(
-              "Solar powered outdoor light, no electricity required, No Wire Needed, Automatic Lighting - Auto on at night(On detection of Motion) / auto off at sunrise; Light activates only when sensing motion at night. This acts as a security light, The light lasts for 8-10 hours if fully charged"
-            ), 
-            height: size.height * 0.125, 
-            margin: EdgeInsets.only(bottom: 10)
+    return SafeArea(
+      bottom: false,
+      child: Scaffold(
+        body: isLoading 
+        ? Column(
+          children: [
+            Shimmer.fromColors(
+            child: Container(
+              color:Colors.black, 
+              height: size.height * 0.125, 
+              margin: EdgeInsets.only(bottom: 10)), 
+            baseColor: Color.fromARGB(149, 158, 158, 158), 
+            enabled: isLoading,
+            highlightColor: Colors.grey
           ),
-          Expanded(child: ImagesGridView(allImages: allImages)),
-        ],
+            Expanded(child: AnimationGridView(isLoading: isLoading)),
+          ],
+        ) 
+        : Column(
+          children: [
+            // Container(height: size.height * 0.2, color: Colors.black,),
+            Container(
+              color: Colors.black,
+              padding: EdgeInsets.only(left: 10),
+              child: Text(
+                "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                style: Theme.of(context).textTheme.bodySmall!
+                .copyWith(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  
+                )
+              ), 
+              height: size.height * 0.125, 
+              // margin: EdgeInsets.only(bottom: 10)
+            ),
+            Expanded(child: ImagesGridView(allImages: allImages)),
+          ],
+        ),
       ),
     );
   }

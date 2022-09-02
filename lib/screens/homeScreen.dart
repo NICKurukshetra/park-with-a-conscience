@@ -90,7 +90,7 @@ class _CategoriesListState extends State<CategoriesList> {
                       borderRadius: BorderRadius.circular(30),
                       child: Image.asset(
                         allCategories[index].imageAddress,
-                        fit: BoxFit.contain,
+                        fit: index == 0 ? BoxFit.contain : BoxFit.cover,
                       ),
                     ), 
                   ),

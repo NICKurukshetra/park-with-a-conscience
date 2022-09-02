@@ -63,7 +63,7 @@ class _SprinklerScreenState extends State<SprinklerScreen> {
     Image _image = Image(image: AssetImage("assets/images/istockphoto-1181366400-612x612.jpeg"));
     allImages.add(_image);
     for(String url in imageUrls) {
-      _image = Image.network(url.toString());
+      _image = Image.network(url.toString(),fit: BoxFit.cover);
       allImages.add(_image);
     }
     _image.image.resolve(ImageConfiguration())
@@ -125,6 +125,8 @@ class ImagesGridView extends StatelessWidget {
       itemCount: allImages.length - 1,
       itemBuilder: ((context, index) {
         return Container(
+          color: Colors.amber,
+
           child: allImages[index + 1],
         );
       }

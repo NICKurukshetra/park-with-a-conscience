@@ -90,7 +90,7 @@ class _CategoriesListState extends State<CategoriesList> {
                       borderRadius: BorderRadius.circular(30),
                       child: Image.asset(
                         allCategories[index].imageAddress,
-                        fit: index == 0 ? BoxFit.contain : BoxFit.cover,
+                        fit: BoxFit.cover,
                       ),
                     ), 
                   ),
@@ -149,9 +149,10 @@ class HeaderWithDropDown extends StatelessWidget {
             children: [
               Text(
                 "Arjun Complex",
-                style: Theme.of(context).textTheme.headline4!
+                style: Theme.of(context).textTheme.headline5!
                 .copyWith(
-                  color: Colors.white, 
+                  color: Colors.black,
+                  backgroundColor: Colors.white, 
                   fontWeight: FontWeight.bold,
                   // backgroundColor: Colors.white,
                 )
@@ -159,12 +160,12 @@ class HeaderWithDropDown extends StatelessWidget {
               Row(
                 children: [
                   Text(
-                "Park with a ",
-                style: Theme.of(context).textTheme.headline6!.copyWith(color: Colors.black),
-              ),
-              Text(
-                "ConScience",
-                style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.black)
+                "Park with a ConScience",
+                style: Theme.of(context).textTheme.headline6!
+                .copyWith(
+                  color: Colors.black,
+                  backgroundColor: Colors.white, 
+                ),
               ),
                 ],
               )

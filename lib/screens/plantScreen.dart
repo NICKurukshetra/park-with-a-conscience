@@ -1,9 +1,7 @@
-// import 'dart:convert';
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:park_with_conscience/model/plant_information.dart';
+import 'package:shimmer/shimmer.dart';
 
 
 class PlantScreen extends StatefulWidget {
@@ -16,7 +14,8 @@ class PlantScreen extends StatefulWidget {
 
 class _PlantScreenState extends State<PlantScreen> {
 
-
+  Image? plantImage;
+  bool isLoading = true;
   PlantInfoModel? plantInfo;
   
   
@@ -24,6 +23,12 @@ class _PlantScreenState extends State<PlantScreen> {
     final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
     // final data = json.decode(dataString);
     final plantInfoModel = plantInfoModelFromJson(dataString, index);
+    plantImage = Image.network(plantInfoModel.image, fit: BoxFit.cover);
+    plantImage!.image.resolve(ImageConfiguration())
+    .addListener(ImageStreamListener(
+      (ImageInfo info, bool syncCall) => setState(() {
+        isLoading = false;
+      })));
     setState(() {
     plantInfo = plantInfoModel;
     // index = plantCode;
@@ -50,7 +55,7 @@ class _PlantScreenState extends State<PlantScreen> {
         children: [
           PlantScreenHeader(
             size: size, 
-            plantName: plantInfo?.plantName??"", imageUrl: plantInfo?.image??"", /*plantCommonName:plantInfo. ,*/),
+            plantName: plantInfo?.plantName??"", plantsImage: plantImage, isLoading: isLoading, /*plantCommonName:plantInfo. ,*/),
           // PlantInfoGrid(size: size),
           Expanded(
       child: GridView.count(
@@ -135,13 +140,15 @@ class PlantScreenHeader extends StatelessWidget {
     Key? key,
     required this.size,
     required this.plantName,
-    required this.imageUrl,
+    required this.plantsImage,
+    required this.isLoading,
     // required this.plantCommonName,
   }) : super(key: key);
 
   final Size size;
   final String plantName;
-  final String imageUrl;
+  final Image? plantsImage;
+  final bool isLoading;
   // final String plantCommonName;
 
   @override
@@ -149,12 +156,20 @@ class PlantScreenHeader extends StatelessWidget {
     return Stack(children: [
       Container(
         height: size.height * 0.43,
-        decoration: BoxDecoration(
-          image: DecorationImage(
-          image: NetworkImage(imageUrl),
-          fit: BoxFit.cover,
-          ),
-        ),
+        child: isLoading 
+        ? Shimmer.fromColors(
+          child: Container(color:Colors.black), 
+          baseColor: Colors.green, 
+          enabled: isLoading,
+          highlightColor: Colors.lightGreen
+        )
+        : plantsImage,
+        // decoration: BoxDecoration(
+        //   image: DecorationImage(
+        //   image: NetworkImage(imageUrl),
+        //   fit: BoxFit.cover,
+        //   ),
+        // ),
       ),
       Positioned(
         bottom: 20,

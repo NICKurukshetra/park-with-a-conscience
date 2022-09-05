@@ -13,24 +13,27 @@ class CategoryScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
+        // backgroundColor: Colors.amber,\
         appBar: AppBar(
           title: Text(title),
           foregroundColor: Colors.white,
           backgroundColor: Colors.blueGrey,
           
         ),
-        body: Column(
-          children: [
-            Container(
-              height: size.height * 0.28,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage(imagePath),
-                  fit: BoxFit.cover
-                  )),
-            ),
-            Expanded(
-              child: Container(
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(bottom: 5),
+                height: size.height * 0.25,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage(imagePath),
+                    fit: BoxFit.cover
+                    )),
+              ),
+              Container(
+                height: size.height,
                 width: size.width,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
@@ -46,12 +49,12 @@ class CategoryScreen extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                     fontStyle: FontStyle.italic,
                     fontSize: 18,
-
+        
                   )
                 ), 
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

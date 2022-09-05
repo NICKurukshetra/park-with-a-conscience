@@ -8,7 +8,7 @@ import 'package:park_with_conscience/screens/sprinklersScreen.dart';
 List<Details> categories = [ 
   Details( 
     name: "Smart Solar Lights", 
-    imageAddress: "assets/images/solarLights.gif", 
+    imageAddress: "assets/images/solarLights.jpeg", 
     screenName: SolarLightsScreen() 
   ), 
   Details( 

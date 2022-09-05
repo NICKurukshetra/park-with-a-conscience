@@ -128,93 +128,67 @@ class HeaderWithDropDown extends StatelessWidget {
       // color: Colors.white,
       child: Stack(
         children: [
-    Container(
-      height: size.height * 0.245,
-      // color: Colors.black,
-      decoration: BoxDecoration(
-        // color: Colors.green,
-        image: DecorationImage(
-          image: AssetImage("assets/images/park.jpeg"),
-          fit: BoxFit.cover
-        ),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(36),
-          bottomRight: Radius.circular(36)
-        ) 
-      ),
-      child: Row(
-        children: [
-          Padding(padding: EdgeInsets.all(10)),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Arjun Complex",
-                style: Theme.of(context).textTheme.headline5!
-                .copyWith(
-                  color: Colors.white,
-                  backgroundColor: Color.fromARGB(150, 0, 0, 0), 
-                  fontWeight: FontWeight.bold,
-                  
-                  // backgroundColor: Colors.white,
-                )
+          Container(
+            padding: EdgeInsets.only(left: 20),
+            height: size.height * 0.245,
+            width: size.width,
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/images/park.jpeg"),
+                fit: BoxFit.cover
               ),
-              Row(
-                children: [
-                  Text(
-                "Park with a ConScience",
-                style: Theme.of(context).textTheme.headline6!
-                .copyWith(
-                  color: Colors.white,
-                  backgroundColor: Color.fromARGB(150, 0, 0, 0),  
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(36),
+                bottomRight: Radius.circular(36)
+              ) 
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Arjun Complex",
+                  style: Theme.of(context).textTheme.headline5!
+                  .copyWith(
+                    color: Colors.white,
+                    backgroundColor: Color.fromARGB(200, 0, 0, 0), 
+                    fontWeight: FontWeight.bold,
+                  )
                 ),
-              ),
-                ],
-              )
-              
-            ],
+                Text(
+                  "Park with a ConScience",
+                  style: Theme.of(context).textTheme.headline6!
+                  .copyWith(
+                color: Colors.white,
+                backgroundColor: Color.fromARGB(200, 0, 0, 0),  
+                  ),
+                )
+              ],
+            ),
           ),
-          // Spacer(),
-          // CircleAvatar()
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              margin: EdgeInsets.symmetric(horizontal: 25),
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              height: 54,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [
+                  BoxShadow(
+                    offset: Offset(0,10),
+                    blurRadius: 40,
+                    color: Colors.green.withOpacity(0.6)
+                  ) 
+                ],
+              ),
+              child: DropDownWidget(),
+            )
+          )
         ]
       ),
-    ),
-    Positioned(
-      bottom: 0,
-      left: 0,
-      right: 0,
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 25),
-        padding: EdgeInsets.symmetric(horizontal: 20),
-        height: 54,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(20),
-          boxShadow: [
-            BoxShadow(
-              offset: Offset(0,10),
-              blurRadius: 40,
-              color: Colors.green.withOpacity(0.4)
-            ) 
-          ],
-        ),
-        child: DropDownWidget(),
-        // child: Center(
-        //   child: TextField(
-        //     decoration: InputDecoration(
-        //       hintText: "Search",
-        //       hintStyle: TextStyle(
-        //         color: Colors.blue.withOpacity(0.5)
-        //       ),
-        //       enabledBorder: InputBorder.none,
-        //       focusedBorder: InputBorder.none,
-        //       suffixIcon: IconButton(icon: Icon(Icons.search), onPressed: () {  },)
-        //     ),
-        //   ),
-        // ),
-      )
-    )
-        ]),
     );
   }
 }

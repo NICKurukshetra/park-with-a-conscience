@@ -73,8 +73,8 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
             Shimmer.fromColors(
             child: Container(
               color:Colors.black, 
-              height: size.height * 0.125, 
-              margin: EdgeInsets.only(bottom: 10)), 
+              height: size.height * 0.2, 
+              margin: EdgeInsets.only(top: 10,bottom: 10)), 
             baseColor: Color.fromARGB(149, 158, 158, 158), 
             enabled: isLoading,
             highlightColor: Colors.grey
@@ -87,6 +87,14 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
             children: [
               // Container(height: size.height * 0.2, color: Colors.black,),
               Container(
+                height: size.height * 0.25,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/solarLights.gif"),
+                    fit: BoxFit.cover
+                    )),
+              ),
+              Container(
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
                 Colors.green.withOpacity(.6),
@@ -97,9 +105,9 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
                 ),),
                 //color: Colors.white,
                 padding: EdgeInsets.only(left: 10),
-                margin: EdgeInsets.only(top: 10),
+                margin: EdgeInsets.only(top: 10, bottom: 10),
                 child: Text(
-                  "Solar powered outdoor light,\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged",
+                  "Solar powered outdoor light \n270 degree spread , \n120 degree wide angle sensor, \n15 second timeout after person leaves\nAutomatic Lighting - Light activates only when sensing motion at night.\nThis acts as a security light\nNo electricity required,\nNo Wire Needed,\nThe light lasts for 8-10 hours if fully charged \n1800 watt battery.",
                   style: Theme.of(context).textTheme.bodySmall!
                   .copyWith(
                     color: Colors.black,
@@ -108,10 +116,11 @@ class _SolarLightsScreenState extends State<SolarLightsScreen> {
                     fontSize: 18
                   )
                 ), 
-                height: size.height * 0.2, 
+                height: size.height * 0.4, 
                 // margin: EdgeInsets.only(bottom: 10)
               ),
-              ImagesGridView(allImages: allImages),
+              
+              // ImagesGridView(allImages: allImages),
             ],
           ),
         ),

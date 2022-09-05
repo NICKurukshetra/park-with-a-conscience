@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:shimmer/shimmer.dart';
+class CategoryScreen extends StatelessWidget {
+  const CategoryScreen(
+    { required this.title, required this.imagePath, required this.aboutContent});
 
-class SolarLightsScreen extends StatelessWidget {
-  const SolarLightsScreen({Key? key}) : super(key: key);
+  final String title;
+  final String imagePath;
+  final String aboutContent;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class SolarLightsScreen extends StatelessWidget {
       bottom: false,
       child: Scaffold(
         appBar: AppBar(
-          title: Text("Solar Lights"),
+          title: Text(title),
           foregroundColor: Colors.white,
           backgroundColor: Colors.blueGrey,
           
@@ -23,30 +25,22 @@ class SolarLightsScreen extends StatelessWidget {
               height: size.height * 0.28,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/images/solarLights.gif"),
+                  image: AssetImage(imagePath),
                   fit: BoxFit.cover
                   )),
             ),
             Expanded(
               child: Container(
+                width: size.width,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(colors: [
                     Colors.green.withOpacity(.6),
                     Colors.white.withOpacity(.6),
                  ]),
                 ),
-                padding: EdgeInsets.all(20),
+                padding: EdgeInsets.all(10),
                 child: Text(
-                  """\u2022 Solar powered outdoor light \n
-\u2022 270 degree spread \n
-\u2022 120 degree wide angle sensor \n
-\u2022 15 second timeout after person leaves \n
-\u2022 Automatic Lighting - Light activates only when sensing motion at night.\n
-\u2022 This acts as a security light \n
-\u2022 No electricity required \n
-\u2022 No Wire Needed \n
-\u2022 The light lasts for 8-10 hours if fully charged \n
-\u2022 1800 watt battery.""",
+                  aboutContent,
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -55,7 +49,6 @@ class SolarLightsScreen extends StatelessWidget {
 
                   )
                 ), 
-                height: size.height * 0.4, 
               ),
             ),
           ],

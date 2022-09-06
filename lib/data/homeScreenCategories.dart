@@ -31,7 +31,7 @@ We placed the light after carefully examining the whole area and finding the ide
     imageAddress: "assets/images/sprinklers.png", 
     screenName: CategoryScreen(
       title: 'Sprinklers', 
-      imagePath: 'assets/images/sprinklers.png',
+      imagePath: 'assets/gifs/sprinkler.gif',
       aboutContent: """Water sprinkler 
 
 The high-quality adjustable spray arms with 4 forms nozzle can adjust the sprinkling angle to 45 degrees or 90 degrees to achieve large-area watering effects, or to achieve higher density watering effects.
@@ -73,7 +73,7 @@ This way this nursery also solves the problem of wastage and littering to some e
     imageAddress: "assets/images/gate.jpeg", 
     screenName: CategoryScreen(
       title: 'Automatic Closing Gate', 
-      imagePath: 'assets/images/gate.jpeg',
+      imagePath: 'assets/gifs/gate.gif',
       aboutContent:"""Gates at all four sides of park.
 
 The park is equipped with automatic closing gates on all four sides.
@@ -93,12 +93,13 @@ As these gates open outside of park, thus requiring to pull the gates and close 
     imageAddress: "assets/images/drainage.jpeg", 
     screenName: CategoryScreen(
       title: 'Drainage', 
-      imagePath: 'assets/gifs/solarLights.gif',
+      imagePath: 'assets/gifs/drainage.gif',
       aboutContent:"""Drainage pipe on park's boundary
 
 There are drainage pipes on parks boundary wall with provide a pathway to drain the water on roads into the park.
 
 In rainy season, The streets are filled with water and the sewarage gets blocked. In that time these pipes provide a path to water to flow into the park.
+
 This solves two problems:
 1. It recharges the Ground Water level and provides water to plants in the park.
 2. It Keeps the streets clean and prevents water clogs.

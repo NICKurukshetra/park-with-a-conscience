@@ -1,11 +1,39 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:park_with_conscience/data/homeScreenCategories.dart';
 import 'package:park_with_conscience/model/home_screen_categories.dart';
 import 'package:park_with_conscience/screens/plantScreen.dart';
 
-
-class HomeScreen extends StatelessWidget {
+ List<dynamic>? AllJsonData;
+ bool isLoading = true;
+class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+
+  
+  
+  Future<void> readJson() async {
+    final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
+    AllJsonData = json.decode(dataString);
+    setState(() {
+      isLoading = false;
+    });
+    // final plantInfoModel = plantInfoModelFromJson(dataString, index);
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    readJson();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +41,6 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       bottom: false,
       child: Scaffold(
-        // appBar: AppBar(
-        // elevation: 0.0,
-        // backgroundColor: Colors.green,
-        // leading: IconButton(
-        //   icon: Icon(Icons.menu), 
-        //   onPressed: () {  },)
-        // ),
         body: SingleChildScrollView(
         child: Column(
           children: <Widget>[ 
@@ -194,7 +215,7 @@ class HeaderWithDropDown extends StatelessWidget {
 }
 
 class DropDownWidget extends StatefulWidget {
-  const DropDownWidget({Key? key}) : super(key: key);
+   List<dynamic>? allData;
 
   @override
   State<DropDownWidget> createState() => _DropDownWidgetState();
@@ -202,10 +223,13 @@ class DropDownWidget extends StatefulWidget {
 
 class _DropDownWidgetState extends State<DropDownWidget> {
   String plantCode = "";
+ 
+
   
+
   @override
   Widget build(BuildContext context) {
-    int totalPlants = 28;
+    int totalPlants = isLoading ? 15 : AllJsonData!.length;
     List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
@@ -219,7 +243,10 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         items: totalPlantsList.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
-            child: Text("$value", style: TextStyle(fontSize: 25),),
+            child: Text(
+              isLoading ? "$value :" : "$value : ${AllJsonData![int.parse(value)]['Plant Name:']}", 
+              style: TextStyle(fontSize: 20),
+            ),
           );
         }).toList(), 
         onChanged: (String? newValue) {

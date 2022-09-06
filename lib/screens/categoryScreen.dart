@@ -16,8 +16,16 @@ class CategoryScreen extends StatelessWidget {
         // backgroundColor: Colors.amber,\
         appBar: AppBar(
           title: Text(title),
-          foregroundColor: Colors.white,
-          backgroundColor: Colors.blueGrey,
+    //       flexibleSpace: Container(
+    //         decoration: const BoxDecoration(
+    //         gradient: LinearGradient(
+    //         begin: Alignment.centerLeft,
+    //         end: Alignment.centerRight,
+    //         colors: <Color>[Colors.green, Colors.white]),
+    //   ),
+    // ),
+          foregroundColor: Colors.black,
+          backgroundColor: Colors.white,
           
         ),
         body: SingleChildScrollView(

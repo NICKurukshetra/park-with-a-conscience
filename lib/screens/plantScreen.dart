@@ -195,9 +195,10 @@ class PlantScreenHeader extends StatelessWidget {
         children: [
           Text(
             plantName, 
-            style: Theme.of(context).textTheme.headline4!.copyWith(
+            style: Theme.of(context).textTheme.headline6!.copyWith(
               color: Colors.white, 
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
+              backgroundColor: Color.fromARGB(150, 0, 0, 0) 
             ),
           ),
     ],))

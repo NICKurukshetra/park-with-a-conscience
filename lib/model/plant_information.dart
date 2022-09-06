@@ -2,15 +2,16 @@
 //
 //     final plantInfoModel = plantInfoModelFromJson(jsonString);
 
-// import 'package:meta/meta.dart';
+import 'package:meta/meta.dart';
 import 'dart:convert';
-PlantInfoModel plantInfoModelFromJson(String str, int index) => PlantInfoModel.fromJson(jsonDecode(str)[index]);
+
+PlantInfoModel plantInfoModelFromJson(String str, int index) => PlantInfoModel.fromJson(json.decode(str)[index]);
 
 String plantInfoModelToJson(PlantInfoModel data) => json.encode(data.toJson());
 
 class PlantInfoModel {
     PlantInfoModel({
-        required this.code3NumericDigits,
+        required this.code,
         required this.plantName,
         required this.sunExposure,
         required this.waterNeeds,
@@ -20,11 +21,12 @@ class PlantInfoModel {
         required this.usesBenefits,
         required this.flowering,
         required this.type,
+        required this.size,
         required this.image,
-        required this.germsMainAffecting,
+        required this.about,
     });
 
-    String code3NumericDigits;
+    String code;
     String plantName;
     String sunExposure;
     String waterNeeds;
@@ -34,11 +36,12 @@ class PlantInfoModel {
     String usesBenefits;
     String flowering;
     String type;
+    String size;
     String image;
-    String germsMainAffecting;
+    String about;
 
     factory PlantInfoModel.fromJson(Map<String, dynamic> json) => PlantInfoModel(
-        code3NumericDigits: json["Code (3 Numeric Digits):"],
+        code: json["Code"],
         plantName: json["Plant Name:"],
         sunExposure: json["Sun Exposure:"],
         waterNeeds: json["Water Needs"],
@@ -48,12 +51,13 @@ class PlantInfoModel {
         usesBenefits: json["Uses/benefits:"],
         flowering: json["Flowering:"],
         type: json["Type:"],
+        size: json["Size"],
         image: json["Image"],
-        germsMainAffecting: json["Germs (main affecting)"],
+        about: json["About"],
     );
 
     Map<String, dynamic> toJson() => {
-        "Code (3 Numeric Digits):": code3NumericDigits,
+        "Code": code,
         "Plant Name:": plantName,
         "Sun Exposure:": sunExposure,
         "Water Needs": waterNeeds,
@@ -63,7 +67,8 @@ class PlantInfoModel {
         "Uses/benefits:": usesBenefits,
         "Flowering:": flowering,
         "Type:": type,
+        "Size": size,
         "Image": image,
-        "Germs (main affecting)": germsMainAffecting,
+        "About": about,
     };
 }

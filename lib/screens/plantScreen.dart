@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:park_with_conscience/model/plant_information.dart';
+import 'package:readmore/readmore.dart';
 import 'package:shimmer/shimmer.dart';
 
 
@@ -51,32 +52,33 @@ class _PlantScreenState extends State<PlantScreen> {
     return Scaffold(
       // appBar: AppBar(),
       backgroundColor: Color.fromARGB(243, 255, 255, 255),
-      body: Column(
-        children: [
-          PlantScreenHeader(
-            size: size, 
-            plantName: plantInfo?.plantName??"", plantsImage: plantImage, isLoading: isLoading, /*plantCommonName:plantInfo. ,*/),
-          // PlantInfoGrid(size: size),
-          Expanded(
-      child: GridView.count(
-        physics: NeverScrollableScrollPhysics(),
-        crossAxisCount: 3,
-        padding: EdgeInsets.all(10),
-        mainAxisSpacing: 15,
-        crossAxisSpacing: 15,
-        children: [
-          InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
-          InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
-          InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
-          InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.type??"",),
-          InfoCard(size: size, cardName: 'maintenance', icon: Icons.content_cut, iconColor: Colors.blueGrey,information: plantInfo?.code3NumericDigits??"",),
-          InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-        ],
-        
-      ),
-    ),
-          PlantInfoText(size: size)
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            PlantScreenHeader(
+              size: size, 
+              plantName: plantInfo?.plantName??"", plantsImage: plantImage, isLoading: isLoading, /*plantCommonName:plantInfo. ,*/),
+            // PlantInfoGrid(size: size),
+            GridView.count(
+              shrinkWrap: true,
+              physics: NeverScrollableScrollPhysics(),
+              crossAxisCount: 3,
+              padding: EdgeInsets.all(10),
+              mainAxisSpacing: 15,
+              crossAxisSpacing: 15,
+              children: [
+                InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
+                InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
+                InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
+                InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
+                InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo?.propagation??"",),
+                InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+              ],
+              
+              ),
+            PlantInfoText(size: size, aboutPlant: plantInfo?.about??"",)
+          ],
+        ),
       ),
       floatingActionButton: IconButton(
         icon: Icon(
@@ -100,9 +102,11 @@ class PlantInfoText extends StatelessWidget {
   const PlantInfoText({
     Key? key,
     required this.size,
+    required this.aboutPlant,
   }) : super(key: key);
 
   final Size size;
+  final String aboutPlant;
   // final String info;
 
   @override
@@ -110,7 +114,7 @@ class PlantInfoText extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(10),
       padding: EdgeInsets.all(10),
-      height: size.height * 0.24,
+      // height: size.height * 0.24,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(Radius.circular(20))
@@ -125,10 +129,22 @@ class PlantInfoText extends StatelessWidget {
             )
           ),
           SizedBox(height: 10,),
-          Text(
-            "Clita kasd gubergren et sit ipsum nonumy nonumy invidunt. Voluptua diam dolor clita sed eos amet, amet at et stet diam lorem et at takimata dolor, aliquyam clita rebum consetetur clita sed justo et ut. Vero sed dolores diam sea et diam lorem lorem. Magna sea ut diam sea justo..",
-            style: Theme.of(context).textTheme.bodyLarge,
+
+          ReadMoreText(
+            aboutPlant, 
+            trimLines: 4, 
+            textAlign: TextAlign.justify, 
+            trimMode: TrimMode.Line,
+            trimCollapsedText: " Show more ",
+            trimExpandedText: " Show less ",
+            style: TextStyle(
+              fontSize: 18,
+            ),
           )
+          // Text(
+          //   aboutPlant,
+          //   style: Theme.of(context).textTheme.caption,
+          // )
         ]),
       
     );

@@ -71,7 +71,7 @@ class _PlantScreenState extends State<PlantScreen> {
                 InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
                 InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
                 InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
-                InfoCard(size: size, cardName: 'Propagation', icon: Icons.content_cut, iconColor: Colors.blueGrey,information: plantInfo?.propagation??"",),
+                InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo?.propagation??"",),
                 InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
               ],
               
@@ -135,7 +135,7 @@ class PlantInfoText extends StatelessWidget {
             trimLines: 4, 
             textAlign: TextAlign.justify, 
             trimMode: TrimMode.Line,
-            trimCollapsedText: " Read more ",
+            trimCollapsedText: " Show more ",
             trimExpandedText: " Show less ",
             style: TextStyle(
               fontSize: 18,

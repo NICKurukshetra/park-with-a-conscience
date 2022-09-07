@@ -40,6 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       bottom: false,
+      top: false,
       child: Scaffold(
         body: SingleChildScrollView(
         child: Column(
@@ -122,7 +123,7 @@ class _CategoriesListState extends State<CategoriesList> {
                       .copyWith(
                         color: Colors.black, 
                         fontWeight: FontWeight.bold, 
-                        backgroundColor: Color.fromARGB(200, 255, 255, 255)
+                        backgroundColor: Color.fromARGB(80, 255, 255, 255)
                       ),
                     ))
                 ]),
@@ -145,13 +146,13 @@ class HeaderWithDropDown extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.only(bottom: 50),
-      height: size.height * 0.27,
+      height: size.height * 0.40,
       // color: Colors.white,
       child: Stack(
         children: [
           Container(
             padding: EdgeInsets.only(left: 20),
-            height: size.height * 0.245,
+            height: size.height * 0.375,
             width: size.width,
             decoration: BoxDecoration(
               image: DecorationImage(
@@ -164,14 +165,15 @@ class HeaderWithDropDown extends StatelessWidget {
               ) 
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   "Arjun Complex",
                   style: Theme.of(context).textTheme.headline5!
                   .copyWith(
                     color: Colors.white,
-                    backgroundColor: Color.fromARGB(200, 0, 0, 0), 
+                    backgroundColor: Color.fromARGB(50, 0, 0, 0), 
                     fontWeight: FontWeight.bold,
                   )
                 ),
@@ -180,7 +182,7 @@ class HeaderWithDropDown extends StatelessWidget {
                   style: Theme.of(context).textTheme.headline6!
                   .copyWith(
                 color: Colors.white,
-                backgroundColor: Color.fromARGB(200, 0, 0, 0),  
+                backgroundColor: Color.fromARGB(50, 0, 0, 0),  
                   ),
                 )
               ],

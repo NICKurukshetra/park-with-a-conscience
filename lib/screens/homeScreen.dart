@@ -2,8 +2,10 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:park_with_conscience/data/drawerCategories.dart';
 import 'package:park_with_conscience/data/homeScreenCategories.dart';
 import 'package:park_with_conscience/model/home_screen_categories.dart';
+import 'package:park_with_conscience/screens/imageGalleryScreen.dart';
 import 'package:park_with_conscience/screens/plantScreen.dart';
 
  List<dynamic>? AllJsonData;
@@ -42,6 +44,17 @@ class _HomeScreenState extends State<HomeScreen> {
       bottom: false,
       top: false,
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          flexibleSpace: Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          colors: <Color>[Colors.green, Colors.white]),
+      ),
+    ),
+        ),
         body: SingleChildScrollView(
         child: Column(
           children: <Widget>[ 
@@ -49,11 +62,68 @@ class _HomeScreenState extends State<HomeScreen> {
             CategoriesList(size: size)
           ],
         ),
-      )
+      ),
+      drawer: Drawer(
+        child: Column(
+          children: [
+            Image.asset("assets/pngs/ARJUN COMPLEX logo.png"),
+            ListTile(
+              title: Text("Park Photos"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("Events"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("Visitors"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("Playground"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("Selfie Point"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("NewsPaper Cuttings"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),
+            const Divider(),
+            ListTile(
+              title: Text("Yoga"),
+              onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+              )),
+            ),     
+
+          ],
+        ),
+      ),
       ),
     );
   }
 }
+
 
 class CategoriesList extends StatefulWidget {
   const CategoriesList({
@@ -178,7 +248,7 @@ class HeaderWithDropDown extends StatelessWidget {
                   )
                 ),
                 Text(
-                  "Park with a ConScience",
+                  "Park with a Conscience",
                   style: Theme.of(context).textTheme.headline6!
                   .copyWith(
                 color: Colors.white,

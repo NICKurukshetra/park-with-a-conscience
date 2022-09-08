@@ -1,6 +1,18 @@
 import 'package:park_with_conscience/model/home_screen_categories.dart';
 import 'package:park_with_conscience/screens/categoryScreen.dart';
 List<Details> categories = [ 
+  Details(
+    name: "Plants Information", 
+    imageAddress: "assets/images/plantTile.jpeg", 
+    screenName: CategoryScreen(
+      title: "Plants Information",
+      imagePath: "assets/gifs/plant information.gif",
+      aboutContent: """Plants Information Depiction System
+
+The park is equipped with tiles and
+""",
+    )
+  ),
   Details( 
     name: "Compost pit", 
     imageAddress: "assets/images/compostPit.jpeg", 

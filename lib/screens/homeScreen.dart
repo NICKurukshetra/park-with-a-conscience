@@ -8,7 +8,7 @@ import 'package:park_with_conscience/model/home_screen_categories.dart';
 import 'package:park_with_conscience/screens/imageGalleryScreen.dart';
 import 'package:park_with_conscience/screens/plantScreen.dart';
 
- List<dynamic>? AllJsonData;
+ List<dynamic>? allJsonData;
  bool isLoading = true;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   
   Future<void> readJson() async {
     final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
-    AllJsonData = json.decode(dataString);
+    allJsonData = json.decode(dataString);
     setState(() {
       isLoading = false;
     });
@@ -163,16 +163,18 @@ class _CategoriesListState extends State<CategoriesList> {
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => allCategories[index].screenName));
           },
-          child: Card(
+          child: Card( 
             elevation: 10,
+            margin: EdgeInsets.only(left: 15, right: 15, bottom: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(30), 
               side: BorderSide(
                 color: Colors.black, 
-                width: 4
+                width: 1,
               )
             ),
             child: Container(
+              // color: Colors.amber,
               height: widget.size.height * 0.2,
               child: Stack(
                 alignment: AlignmentDirectional.bottomCenter,
@@ -193,7 +195,7 @@ class _CategoriesListState extends State<CategoriesList> {
                       .copyWith(
                         color: Colors.black, 
                         fontWeight: FontWeight.bold, 
-                        backgroundColor: Color.fromARGB(80, 255, 255, 255)
+                        backgroundColor: Color.fromARGB(100, 255, 255, 255)
                       ),
                     ))
                 ]),
@@ -263,7 +265,7 @@ class HeaderWithDropDown extends StatelessWidget {
             left: 0,
             right: 0,
             child: Container(
-              margin: EdgeInsets.symmetric(horizontal: 25),
+              margin: EdgeInsets.symmetric(horizontal: 30),
               padding: EdgeInsets.symmetric(horizontal: 20),
               height: 54,
               decoration: BoxDecoration(
@@ -301,7 +303,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
 
   @override
   Widget build(BuildContext context) {
-    int totalPlants = isLoading ? 15 : AllJsonData!.length;
+    int totalPlants = isLoading ? 15 : allJsonData!.length;
     List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
@@ -316,7 +318,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(
-              isLoading ? "$value :" : "$value : ${AllJsonData![int.parse(value)]['Plant Name:']}", 
+              isLoading ? "$value :" : "$value : ${allJsonData![int.parse(value)]['Plant Name:']}", 
               style: TextStyle(fontSize: 20),
             ),
           );
@@ -326,7 +328,8 @@ class _DropDownWidgetState extends State<DropDownWidget> {
             plantCode = newValue!;
             Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: int.parse(plantCode),)),
             );
-          });
+          }
+        );
         }
       ),
     );

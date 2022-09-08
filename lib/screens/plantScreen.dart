@@ -242,6 +242,7 @@ class InfoCard extends StatelessWidget {
             information,
             // overflow: TextOverflow.visible,
             style: Theme.of(context).textTheme.bodySmall!.copyWith(
+              fontWeight: FontWeight.bold,
               color: iconColor,
             ),
           ),

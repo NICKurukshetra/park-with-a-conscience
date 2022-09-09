@@ -1,16 +1,16 @@
 // To parse this JSON data, do
 //
-//     final plantInfoModel = plantInfoModelFromJson(jsonString);
+//     final plant = plantFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
-PlantInfoModel plantInfoModelFromJson(String str, int index) => PlantInfoModel.fromJson(json.decode(str)[index]);
+List<Plant> plantFromJson(String str) => List<Plant>.from(json.decode(str).map((x) => Plant.fromJson(x)));
 
-String plantInfoModelToJson(PlantInfoModel data) => json.encode(data.toJson());
+String plantToJson(List<Plant> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
-class PlantInfoModel {
-    PlantInfoModel({
+class Plant {
+    Plant({
+        required this.srno,
         required this.code,
         required this.plantName,
         required this.sunExposure,
@@ -18,14 +18,15 @@ class PlantInfoModel {
         required this.propagation,
         required this.season,
         required this.lifeCycle,
-        required this.usesBenefits,
+        required this.uses,
         required this.flowering,
         required this.type,
-        required this.size,
         required this.image,
+        required this.germs,
         required this.about,
     });
 
+    int srno;
     String code;
     String plantName;
     String sunExposure;
@@ -33,42 +34,44 @@ class PlantInfoModel {
     String propagation;
     String season;
     String lifeCycle;
-    String usesBenefits;
+    String uses;
     String flowering;
     String type;
-    String size;
     String image;
+    String germs;
     String about;
 
-    factory PlantInfoModel.fromJson(Map<String, dynamic> json) => PlantInfoModel(
-        code: json["Code"],
-        plantName: json["Plant Name:"],
-        sunExposure: json["Sun Exposure:"],
-        waterNeeds: json["Water Needs"],
-        propagation: json["Propagation:"],
-        season: json["Season:"],
-        lifeCycle: json["Life Cycle:"],
-        usesBenefits: json["Uses/benefits:"],
-        flowering: json["Flowering:"],
-        type: json["Type:"],
-        size: json["Size"],
-        image: json["Image"],
-        about: json["About"],
+    factory Plant.fromJson(Map<String, dynamic> json) => Plant(
+        srno: json["srno"],
+        code: json["code"],
+        plantName: json["plant_Name"],
+        sunExposure: json["sun_Exposure"],
+        waterNeeds: json["water_Needs"],
+        propagation: json["propagation"],
+        season: json["season"],
+        lifeCycle: json["life_Cycle"],
+        uses: json["uses"],
+        flowering: json["flowering"],
+        type: json["type"],
+        image: json["image"],
+        germs: json["germs"],
+        about: json["about"],
     );
 
     Map<String, dynamic> toJson() => {
-        "Code": code,
-        "Plant Name:": plantName,
-        "Sun Exposure:": sunExposure,
-        "Water Needs": waterNeeds,
-        "Propagation:": propagation,
-        "Season:": season,
-        "Life Cycle:": lifeCycle,
-        "Uses/benefits:": usesBenefits,
-        "Flowering:": flowering,
-        "Type:": type,
-        "Size": size,
-        "Image": image,
-        "About": about,
+        "srno": srno,
+        "code": code,
+        "plant_Name": plantName,
+        "sun_Exposure": sunExposure,
+        "water_Needs": waterNeeds,
+        "propagation": propagation,
+        "season": season,
+        "life_Cycle": lifeCycle,
+        "uses": uses,
+        "flowering": flowering,
+        "type": type,
+        "image": image,
+        "germs": germs,
+        "about": about,
     };
 }

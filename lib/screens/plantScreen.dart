@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:park_with_conscience/model/plant_information.dart';
 import 'package:readmore/readmore.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:http/http.dart' as http;
 
 
 class PlantScreen extends StatefulWidget {
-  final int plantCode;
+  final String plantCode;
   
   const PlantScreen({super.key, required this.plantCode}); 
   @override
@@ -17,21 +17,23 @@ class _PlantScreenState extends State<PlantScreen> {
 
   Image? plantImage;
   bool isLoading = true;
-  PlantInfoModel? plantInfo;
+  Plant? plantInfo;
   
   
-  Future<void> readJson( int index) async {
-    final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
+  Future<void> readJson() async {
+    // final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
+    var dataString = http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
     // final data = json.decode(dataString);
-    final plantInfoModel = plantInfoModelFromJson(dataString, index);
-    plantImage = Image.network(plantInfoModel.image, fit: BoxFit.cover);
+    final plantInfoModel = plantFromJson(dataString.toString());
+
+    plantImage = Image.network(plantInfoModel[0].image, fit: BoxFit.cover);
     plantImage!.image.resolve(ImageConfiguration())
     .addListener(ImageStreamListener(
       (ImageInfo info, bool syncCall) => setState(() {
         isLoading = false;
       })));
     setState(() {
-    plantInfo = plantInfoModel;
+    plantInfo = plantInfoModel.where((element) => element.code==widget.plantCode).toList().first;
     // index = plantCode;
       
     });
@@ -41,8 +43,7 @@ class _PlantScreenState extends State<PlantScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    int index = widget.plantCode;
-    readJson(index);
+    readJson();
   }
 
   @override
@@ -70,9 +71,16 @@ class _PlantScreenState extends State<PlantScreen> {
                 InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
                 InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
                 InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
-                InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
+                //InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
                 InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo?.propagation??"",),
+                InfoCard(size: size, cardName: 'Propagation Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
                 InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+                InfoCard(size: size, cardName: 'Flowering', icon: Icons.filter_vintage, iconColor: Colors.lightGreen,information: plantInfo?.flowering??"",),
+                InfoCard(size: size, cardName: 'Flowering Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+                InfoCard(size: size, cardName: 'Life Cycle', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.lifeCycle??"",),
+                InfoCard(size: size, cardName: 'Medicinal', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+                InfoCard(size: size, cardName: 'fertilizer', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+                InfoCard(size: size, cardName: 'Maintainace', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
               ],
               
               ),
@@ -248,8 +256,9 @@ class InfoCard extends StatelessWidget {
           ),
           Text(
             cardName.toUpperCase(),
+            textScaleFactor: 0.6,
             style: Theme.of(context).textTheme.bodyText2!.copyWith(
-              fontWeight: FontWeight.bold
+              fontWeight: FontWeight.bold,
             ),
           )
         ]),

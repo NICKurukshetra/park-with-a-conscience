@@ -1,14 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:park_with_conscience/data/drawerCategories.dart';
 import 'package:park_with_conscience/data/homeScreenCategories.dart';
 import 'package:park_with_conscience/model/home_screen_categories.dart';
+import 'package:park_with_conscience/model/plant_information.dart';
 import 'package:park_with_conscience/screens/imageGalleryScreen.dart';
 import 'package:park_with_conscience/screens/plantScreen.dart';
+import 'package:http/http.dart' as http;
 
- List<dynamic>? allJsonData;
+ List<Plant>? allJsonData;
  bool isLoading = true;
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -22,8 +21,11 @@ class _HomeScreenState extends State<HomeScreen> {
   
   
   Future<void> readJson() async {
-    final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
-    allJsonData = json.decode(dataString);
+    // final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
+    // allJsonData = json.decode(dataString);
+    var dataString = http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
+     allJsonData = plantFromJson(dataString.toString());
+
     setState(() {
       isLoading = false;
     });
@@ -64,56 +66,85 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        child: SingleChildScrollView(
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+              colors: [
+                    Colors.green.withOpacity(.7),
+                    Colors.green.withOpacity(.6),
+                    Colors.white.withOpacity(.7),
+                    Colors.white.withOpacity(.7),
+                 ]
+            ),
+          ),
           child: Column(
             children: [
               Image.asset("assets/pngs/ARJUN COMPLEX logo.png"),
+              Divider( thickness: 1, color: Colors.black,),
               ListTile(
-                title: Text("Park Photos"),
+                shape: RoundedRectangleBorder( borderRadius: BorderRadius.circular(10), ),
+                leading: Icon(Icons.park),
+                title: Text("Park Photos", style: TextStyle(fontSize: 20),),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("NewsPaper Cuttings"),
+                title: Text("NewsPaper Cuttings", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.description),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[1]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("Visitors"),
+                title: Text("Visitors", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.groups),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[2]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("Events"),
+                title: Text("Facilitation Camp (CGC)", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.campaign),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
                   builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[3]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("Playground"),
+                title: Text("Waste craft Event", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.recycling),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[4]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("Selfie Point"),
+                title: Text("Playground", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.grass),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[5]))
                 )),
               ),
-              const Divider(),
               ListTile(
-                title: Text("Yoga Classes"),
+                title: Text("Selfie Point", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.photo_camera),
                 onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[6]))
+                )),
+              ),
+              ListTile(
+                title: Text("Yoga Classes", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.self_improvement),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[7]))
+                )),
+              ),     
+              ListTile(
+                title: Text("Tools", style: TextStyle(fontSize: 20),),
+                leading: Icon(Icons.handyman),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[8]))
                 )),
               ),     
         
@@ -306,7 +337,7 @@ class _DropDownWidgetState extends State<DropDownWidget> {
   @override
   Widget build(BuildContext context) {
     int totalPlants = isLoading ? 15 : allJsonData!.length;
-    List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
+    // List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
@@ -316,19 +347,27 @@ class _DropDownWidgetState extends State<DropDownWidget> {
         isExpanded: true,
         // iconDisabledColor: Colors.green,
         icon: const Icon(Icons.arrow_drop_down, color: Colors.green, size: 40,),
-        items: totalPlantsList.map<DropdownMenuItem<String>>((String value) {
-          return DropdownMenuItem<String>(
-            value: value,
-            child: Text(
-              isLoading ? "$value :" : "$value : ${allJsonData![int.parse(value)]['Plant Name:']}", 
-              style: TextStyle(fontSize: 20),
-            ),
-          );
-        }).toList(), 
+    
+        // items: totalPlantsList.map<DropdownMenuItem<String>>((String value) {
+        //   return DropdownMenuItem<String>(
+        //     value: value,
+        //     child: Text(
+        //       isLoading ? "$value :" : "$value : ${allJsonData![int.parse(value)]['Plant Name:']}", 
+        //       style: TextStyle(fontSize: 20),
+        //     ),
+        //   );
+        // })
+        // .toList(), 
+        items: allJsonData!.map((Plant item) {
+          return new DropdownMenuItem(
+            child: Text(item.plantName),
+            value: item.code,
+            );
+        }).toList(),
         onChanged: (String? newValue) {
           setState(() {
             plantCode = newValue!;
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: int.parse(plantCode),)),
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: newValue)),
             );
           }
         );

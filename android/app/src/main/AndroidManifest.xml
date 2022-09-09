@@ -3,6 +3,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
    <application
+        android:usesClearTextTraffic = "true"
         android:label="park_with_conscience"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">

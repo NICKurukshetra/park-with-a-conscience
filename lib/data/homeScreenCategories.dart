@@ -54,6 +54,26 @@ The sprinklers need to be regularly used else they would become blocked with alg
 """, 
       ) 
   ),
+  Details( 
+    name: "Free Nursery", 
+    imageAddress: "assets/images/nursery.heic", 
+    screenName: CategoryScreen(
+      title: 'Free Nursery', 
+      imagePath: 'assets/gifs/nursery.gif',
+      aboutContent: """Free Nursery in park
+
+The park offers free plants to all. Anybody and Everybody is free to take any plant from the nursery provided inside the park.
+
+The Saplings are taken from the park itself and grown inside the park as well. This makes this nursery self-sustainable with minimal maintainance and truly free.
+
+The plants in the nursery are also grown from existing plants through various techniques.
+
+The milk packets or any plastic containers that are usually thrown away on roads or that end up in garbage dump are utilized here as containers for the plants.
+This way this nursery also solves the problem of wastage and littering to some extent.
+
+""", 
+      ) 
+  ), 
   Details(
     name: "Plants Information", 
     imageAddress: "assets/images/plantTile.jpeg", 
@@ -111,26 +131,6 @@ We placed the light after carefully examining the whole area and finding the ide
 """, 
     ) 
   ),  
-  Details( 
-    name: "Free Nursery", 
-    imageAddress: "assets/images/nursery.heic", 
-    screenName: CategoryScreen(
-      title: 'Free Nursery', 
-      imagePath: 'assets/gifs/nursery.gif',
-      aboutContent: """Free Nursery in park
-
-The park offers free plants to all. Anybody and Everybody is free to take any plant from the nursery provided inside the park.
-
-The Saplings are taken from the park itself and grown inside the park as well. This makes this nursery self-sustainable with minimal maintainance and truly free.
-
-The plants in the nursery are also grown from existing plants through various techniques.
-
-The milk packets or any plastic containers that are usually thrown away on roads or that end up in garbage dump are utilized here as containers for the plants.
-This way this nursery also solves the problem of wastage and littering to some extent.
-
-""", 
-      ) 
-  ), 
   Details( 
     name: "Rainwater harvesting", 
     imageAddress: "assets/images/drainage.jpeg", 

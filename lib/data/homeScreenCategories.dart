@@ -37,7 +37,7 @@ The second and third pit is filled in the meantime, thus ensuring that compost i
     imageAddress: "assets/images/sprinklers.png", 
     screenName: CategoryScreen(
       title: 'Sprinklers', 
-      imagePath: 'assets/gifs/sprinklers (1).gif',
+      imagePath: 'assets/gifs/90° Water Sprinklers.gif',
       aboutContent: """Water sprinkler 
 
 The high-quality adjustable spray arms with 4 forms nozzle can adjust the sprinkling angle to 45 degrees or 90 degrees to achieve large-area watering effects, or to achieve higher density watering effects.
@@ -82,7 +82,16 @@ This way this nursery also solves the problem of wastage and littering to some e
       imagePath: "assets/gifs/plant information.gif",
       aboutContent: """Plants Information Depiction System
 
-The park is equipped with tiles and
+The park is equipped with nameplates displaying Plant name and code.
+Anyone can use this code to get plant Information from the Website and app.
+
+The app shows you the photo and name of the plant on top.
+
+Important plants information such as The amount of sunlight and water needed can be seen on centre of screen.
+The app also shows you the method of propagation i.e How you can regrow the plant as well.
+
+On the bottom, the app gives you general description and information of the plant.
+
 """,
     )
   ),

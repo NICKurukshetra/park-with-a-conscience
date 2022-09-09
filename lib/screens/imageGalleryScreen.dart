@@ -40,72 +40,43 @@ class _GalleryScreenState extends State<GalleryScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: AppBar(
+        foregroundColor: Colors.black,
+        backgroundColor: Colors.white,
+        // title: Text("Swipe ->"),
         leading: IconButton(
         icon: Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () => Navigator.of(context).pop(),
   ),
       ),
+      // body: isLoading 
+      // ? AnimationGridView(isLoading: isLoading) 
+      // : ImagesGridView(allImages: allImages),
       body: isLoading 
-      ? AnimationGridView(isLoading: isLoading) 
-      : ImagesGridView(allImages: allImages),
-    );
-  }
-}
-
-class ImagesGridView extends StatelessWidget {
-  const ImagesGridView({
-    Key? key,
-    required this.allImages,
-  }) : super(key: key);
-
-  final List<Image> allImages;
-
-  @override
-  Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-      crossAxisCount: 3, 
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      itemCount: allImages.length - 1,
-      itemBuilder: ((context, index) {
-        return allImages[index+1];
-      }
-    ), 
-      staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
-      ),
-
-    );
-  }
-}
-
-class AnimationGridView extends StatelessWidget {
-  const AnimationGridView({
-    Key? key,
-    required this.isLoading,
-  }) : super(key: key);
-
-  final bool isLoading;
-
-  @override
-  Widget build(BuildContext context) {
-    return StaggeredGridView.countBuilder(
-      crossAxisSpacing: 10,
-      mainAxisSpacing: 10,
-      itemCount: 20,
-      crossAxisCount: 3,
-      staggeredTileBuilder: (index) => StaggeredTile.count(
-         (index % 4 == 0) ? 2 : 1, (index % 4 == 0) ? 2 : 1
-      ),
-      itemBuilder: (context, index) {
-        return Shimmer.fromColors(
+      ? Shimmer.fromColors(
           child: Container(color:Colors.black), 
           baseColor: Color.fromARGB(149, 158, 158, 158), 
           enabled: isLoading,
           highlightColor: Colors.grey
-        );
-      },
+        )
+      : ListView.builder(
+        itemCount: allImages.length - 1,
+        // scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return InteractiveViewer(
+            panEnabled: false,
+            minScale: 1,
+            maxScale: 4, 
+            child: Container(
+              // color: Colors.amber, 
+              // width: size.width, 
+              margin: EdgeInsets.all(5),
+              child: allImages[index + 1]
+            ),
+          );
+        } ,
+      )
     );
   }
 }

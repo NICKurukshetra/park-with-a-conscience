@@ -54,6 +54,18 @@ The sprinklers need to be regularly used else they would become blocked with alg
 """, 
       ) 
   ),
+  Details(
+    name: "Plants Information", 
+    imageAddress: "assets/images/plantTile.jpeg", 
+    screenName: CategoryScreen(
+      title: "Plants Information",
+      imagePath: "assets/gifs/plant information.gif",
+      aboutContent: """Plants Information Depiction System
+
+The park is equipped with tiles and
+""",
+    )
+  ),
   Details( 
     name: "Automatic Closing gates", 
     imageAddress: "assets/images/gate.jpeg", 

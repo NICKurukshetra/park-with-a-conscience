@@ -64,59 +64,61 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: Drawer(
-        child: Column(
-          children: [
-            Image.asset("assets/pngs/ARJUN COMPLEX logo.png"),
-            ListTile(
-              title: Text("Park Photos"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("Events"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("Visitors"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("Playground"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("Selfie Point"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("NewsPaper Cuttings"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),
-            const Divider(),
-            ListTile(
-              title: Text("Yoga"),
-              onTap: () => Navigator.of(context).push(MaterialPageRoute(
-                builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
-              )),
-            ),     
-
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Image.asset("assets/pngs/ARJUN COMPLEX logo.png"),
+              ListTile(
+                title: Text("Park Photos"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("NewsPaper Cuttings"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[1]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("Visitors"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[2]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("Events"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[3]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("Playground"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("Selfie Point"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                )),
+              ),
+              const Divider(),
+              ListTile(
+                title: Text("Yoga Classes"),
+                onTap: () => Navigator.of(context).push(MaterialPageRoute(
+                  builder: ((context) => GalleryScreen(imageUrls: allDrawerImages[0]))
+                )),
+              ),     
+        
+            ],
+          ),
         ),
       ),
       ),

@@ -20,12 +20,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   
   
-  Future<void> readJson() async {
+  readJson() async {
     // final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
     // allJsonData = json.decode(dataString);
-    var dataString = http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
-     allJsonData = plantFromJson(dataString.toString());
-
+    // var dataString = await http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
+    var dataString = await http.get(Uri.http("103.87.24.58", "stockapi/Plant")); 
+     allJsonData = plantFromJson(dataString.body.toString());
+     allJsonData!.sort(((a, b) => int.parse(a.code).compareTo(int.parse(b.code))));
     setState(() {
       isLoading = false;
     });
@@ -308,7 +309,7 @@ class HeaderWithDropDown extends StatelessWidget {
                   BoxShadow(
                     offset: Offset(0,10),
                     blurRadius: 40,
-                    color: Colors.green.withOpacity(0.6)
+                    color: Colors.green.withOpacity(0.6),
                   ) 
                 ],
               ),
@@ -330,47 +331,36 @@ class DropDownWidget extends StatefulWidget {
 
 class _DropDownWidgetState extends State<DropDownWidget> {
   String plantCode = "";
- 
+  var plantData;
 
   
 
   @override
   Widget build(BuildContext context) {
-    int totalPlants = isLoading ? 15 : allJsonData!.length;
+    // int totalPlants = isLoading ? 5 : allJsonData!.length;
     // List<String> totalPlantsList = List<String>.generate(totalPlants, (i) => i.toString().padLeft(3,'0') , growable: true);
     return DropdownButtonHideUnderline(
       child: DropdownButton<String>(
         borderRadius: const BorderRadius.all(Radius.circular(20)),
         elevation: 10,
         hint: Text("Select Plant Code"),
-        // value: plantCode,
+        value: "1",
         isExpanded: true,
-        // iconDisabledColor: Colors.green,
         icon: const Icon(Icons.arrow_drop_down, color: Colors.green, size: 40,),
-    
-        // items: totalPlantsList.map<DropdownMenuItem<String>>((String value) {
-        //   return DropdownMenuItem<String>(
-        //     value: value,
-        //     child: Text(
-        //       isLoading ? "$value :" : "$value : ${allJsonData![int.parse(value)]['Plant Name:']}", 
-        //       style: TextStyle(fontSize: 20),
-        //     ),
-        //   );
-        // })
-        // .toList(), 
-        items: allJsonData!.map((Plant item) {
+        items: allJsonData?.map((Plant item) {
           return new DropdownMenuItem(
-            child: Text(item.plantName),
+            child: Text("${item.code} : ${item.plantName}"),
             value: item.code,
             );
-        }).toList(),
+        }).toList(),  
         onChanged: (String? newValue) {
           setState(() {
             plantCode = newValue!;
-            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantCode: newValue)),
-            );
+            // print(plantCode);
+            plantData = allJsonData![int.parse(plantCode)-1];
+            Navigator.of(context).push(MaterialPageRoute(builder: (context) => PlantScreen(plantInfoModel: plantData)),);
           }
-        );
+          );
         }
       ),
     );

@@ -33,7 +33,10 @@ class _PlantScreenState extends State<PlantScreen> {
     // final data = json.decode(dataString);
     // final plantInfoModel = plantFromJson(dataString.toString());
 
-    plantImage = Image.network(widget.plantInfoModel.image, fit: BoxFit.cover);
+    plantImage = Image.network(
+      widget.plantInfoModel.image.replaceAll("/0/open?usp=forms_web&", "c?"), 
+      fit: BoxFit.cover
+    );
     plantImage!.image.resolve(ImageConfiguration())
     .addListener(ImageStreamListener(
       (ImageInfo info, bool syncCall) => setState(() {

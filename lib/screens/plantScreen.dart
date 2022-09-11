@@ -6,9 +6,16 @@ import 'package:http/http.dart' as http;
 
 
 class PlantScreen extends StatefulWidget {
-  final String plantCode;
+  // final String plantCode;
+  final Plant plantInfoModel;
   
-  const PlantScreen({super.key, required this.plantCode}); 
+  const PlantScreen(
+    {
+      super.key, 
+      // required this.plantCode, 
+      required this.plantInfoModel
+    }
+  ); 
   @override
   State<PlantScreen> createState() => _PlantScreenState();
 }
@@ -17,24 +24,25 @@ class _PlantScreenState extends State<PlantScreen> {
 
   Image? plantImage;
   bool isLoading = true;
-  Plant? plantInfo;
+  late Plant plantInfo;
   
   
-  Future<void> readJson() async {
+  Future<void> loadPlantInfo() async {
     // final String dataString = await rootBundle.loadString('assets/json/plantInfo.json');
-    var dataString = http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
+    // var dataString = http.get(Uri.parse("http://103.87.24.58/stockapi/Plant"));
     // final data = json.decode(dataString);
-    final plantInfoModel = plantFromJson(dataString.toString());
+    // final plantInfoModel = plantFromJson(dataString.toString());
 
-    plantImage = Image.network(plantInfoModel[0].image, fit: BoxFit.cover);
+    plantImage = Image.network(widget.plantInfoModel.image, fit: BoxFit.cover);
     plantImage!.image.resolve(ImageConfiguration())
     .addListener(ImageStreamListener(
       (ImageInfo info, bool syncCall) => setState(() {
         isLoading = false;
       })));
     setState(() {
-    plantInfo = plantInfoModel.where((element) => element.code==widget.plantCode).toList().first;
+    // plantInfo = plantInfoModel.where((element) => element.code==widget.plantCode).toList().first;
     // index = plantCode;
+    plantInfo = widget.plantInfoModel;
       
     });
   }
@@ -43,7 +51,7 @@ class _PlantScreenState extends State<PlantScreen> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    readJson();
+    loadPlantInfo();
   }
 
   @override
@@ -58,7 +66,7 @@ class _PlantScreenState extends State<PlantScreen> {
           children: [
             PlantScreenHeader(
               size: size, 
-              plantName: plantInfo?.plantName??"", plantsImage: plantImage, isLoading: isLoading, /*plantCommonName:plantInfo. ,*/),
+              plantName: plantInfo.plantName, plantsImage: plantImage, isLoading: isLoading, /*plantCommonName:plantInfo. ,*/),
             // PlantInfoGrid(size: size),
             GridView.count(
               shrinkWrap: true,
@@ -68,23 +76,23 @@ class _PlantScreenState extends State<PlantScreen> {
               mainAxisSpacing: 15,
               crossAxisSpacing: 15,
               children: [
-                InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo?.sunExposure??"",),
-                InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo?.waterNeeds??"",),
-                InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo?.season??"",),
+                InfoCard(size: size, cardName: 'sunlight', icon: Icons.wb_sunny_outlined, iconColor: Colors.amber, information: plantInfo.sunExposure),
+                InfoCard(size: size, cardName: 'water needs', icon: Icons.water_drop_outlined, iconColor: Colors.blue,information: plantInfo.waterNeeds),
+                InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo.season),
                 //InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
-                InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo?.propagation??"",),
-                InfoCard(size: size, cardName: 'Propagation Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-                InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-                InfoCard(size: size, cardName: 'Flowering', icon: Icons.filter_vintage, iconColor: Colors.lightGreen,information: plantInfo?.flowering??"",),
-                InfoCard(size: size, cardName: 'Flowering Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-                InfoCard(size: size, cardName: 'Life Cycle', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.lifeCycle??"",),
-                InfoCard(size: size, cardName: 'Medicinal', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-                InfoCard(size: size, cardName: 'fertilizer', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
-                InfoCard(size: size, cardName: 'Maintainace', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo?.type??"",),
+                InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo.propagation.replaceAll(RegExp('\\(.*?\\)'), '')),
+                InfoCard(size: size, cardName: 'Propagation Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type.replaceAll(RegExp('\\(.*?\\)'), '')),
+                InfoCard(size: size, cardName: 'Flowering', icon: Icons.filter_vintage, iconColor: Colors.lightGreen,information: plantInfo.flowering),
+                InfoCard(size: size, cardName: 'Flowering Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'Life Cycle', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.lifeCycle),
+                InfoCard(size: size, cardName: 'Medicinal', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'fertilizer', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'Maintainace', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
               ],
               
               ),
-            PlantInfoText(size: size, aboutPlant: plantInfo?.about??"",)
+            PlantInfoText(size: size, aboutPlant: plantInfo.about)
           ],
         ),
       ),

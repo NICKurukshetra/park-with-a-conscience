@@ -81,14 +81,14 @@ class _PlantScreenState extends State<PlantScreen> {
                 InfoCard(size: size, cardName: 'season', icon: Icons.thermostat, iconColor: Colors.orange,information: plantInfo.season),
                 //InfoCard(size: size, cardName: 'size', icon: Icons.nature_people_outlined, iconColor: Colors.green,information: plantInfo?.size??"",),
                 InfoCard(size: size, cardName: 'Propagation', icon: Icons.queue, iconColor: Colors.blueGrey,information: plantInfo.propagation.replaceAll(RegExp('\\(.*?\\)'), '')),
-                InfoCard(size: size, cardName: 'Propagation Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'Propagation Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: "plantInfo.propSeason"),
                 InfoCard(size: size, cardName: 'type', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type.replaceAll(RegExp('\\(.*?\\)'), '')),
                 InfoCard(size: size, cardName: 'Flowering', icon: Icons.filter_vintage, iconColor: Colors.lightGreen,information: plantInfo.flowering),
-                InfoCard(size: size, cardName: 'Flowering Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'Flowering Season', icon: Icons.grass, iconColor: Colors.lightGreen,information: "plantInfo.flowerSeason"),
                 InfoCard(size: size, cardName: 'Life Cycle', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.lifeCycle),
-                InfoCard(size: size, cardName: 'Medicinal', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
-                InfoCard(size: size, cardName: 'fertilizer', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
-                InfoCard(size: size, cardName: 'Maintainace', icon: Icons.grass, iconColor: Colors.lightGreen,information: plantInfo.type),
+                InfoCard(size: size, cardName: 'Medicinal', icon: Icons.grass, iconColor: Colors.lightGreen,information: "plantInfo.medicinal"),
+                InfoCard(size: size, cardName: 'fertilizer', icon: Icons.grass, iconColor: Colors.lightGreen,information: "plantInfo.fertilizer"),
+                InfoCard(size: size, cardName: 'Maintainace', icon: Icons.grass, iconColor: Colors.lightGreen,information: "plantInfo.maintainance"),
               ],
               
               ),
@@ -257,9 +257,10 @@ class InfoCard extends StatelessWidget {
           Text(
             information,
             // overflow: TextOverflow.visible,
-            style: Theme.of(context).textTheme.bodySmall!.copyWith(
+            style: TextStyle(
               fontWeight: FontWeight.bold,
               color: iconColor,
+              fontSize: 11
             ),
           ),
           Text(
